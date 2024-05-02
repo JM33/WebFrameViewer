@@ -92,7 +92,8 @@
         
             const xrTest = fm.enableFeature(BABYLON.WebXRHitTest, "latest");
         
-            const marker = BABYLON.Mesh.CreateDisc("disc",0.2,64, scene);
+            const marker = BABYLON.MeshBuilder.CreateTorus('marker', { diameter: 0.15, thickness: 0.05 });
+            scene.getMeshByName("marker").metadata = "marker";
             marker.isVisible = false;
             marker.rotationQuaternion = new BABYLON.Quaternion();
         
@@ -105,6 +106,26 @@
                     marker.isVisible = false;
                 }
             });
+
+
+            const frame = BABYLON.SceneLoader.ImportMesh("frame", "https://github.com/JM33/WebFrameViewer/blob/main/", "waara_frame.glb", scene, function (newMeshes) {});
+            frame.isVisible = false;
+            
+            scene.onPointerDown = function castRay(){
+            var ray = scene.createPickingRay(scene.pointerX, scene.pointerY, BABYLON.Matrix.Identity(), camera, false);	
+
+            var hit = scene.pickWithRay(ray);
+
+            console.log("debug");
+
+            if (hit.pickedMesh && hit.pickedMesh.metadata == "marker"){
+                placeFrame();
+            }
+
+            function placeFrame(){
+                frame.transformationMatrix = marker.transformationMatrix;
+                frame.isVisible = true;
+            }
         
             return scene;
         
