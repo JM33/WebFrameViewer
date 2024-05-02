@@ -61,11 +61,16 @@
         var scene = null;
         var sceneToRender = null;
         var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
-        var createScene = function () {
+        var createScene = async function () {
+
     // This creates a basic Babylon Scene object (non-mesh)
     var scene = new BABYLON.Scene(engine);
 
-    var camera = new BABYLON.ArcRotateCamera("camera", BABYLON.Tools.ToRadians(90), BABYLON.Tools.ToRadians(65), 10, BABYLON.Vector3.Zero(), scene);
+    // This creates and positions a free camera (non-mesh)
+    var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 1, -5), scene);
+
+    // This targets the camera to scene origin
+    camera.setTarget(BABYLON.Vector3.Zero());
 
     // This attaches the camera to the canvas
     camera.attachControl(canvas, true);
@@ -76,19 +81,33 @@
     // Default intensity is 1. Let's dim the light a small amount
     light.intensity = 0.7;
 
-    // Our built-in 'ground' shape.
-    var ground = BABYLON.MeshBuilder.CreateGround("ground", {width: 6, height: 6}, scene);
+    var xr = await scene.createDefaultXRExperienceAsync({
+        uiOptions: {
+            sessionMode: "immersive-ar",
+        },
+        optionalFeatures: true
+    });
 
-    const groundMaterial = new BABYLON.StandardMaterial("Ground Material", scene);
-    let groundTexture = new BABYLON.Texture(Assets.textures.checkerboard_basecolor_png.rootUrl, scene);
-    groundMaterial.diffuseTexture = groundTexture;
-    ground.material = groundMaterial;
+    const fm = xr.baseExperience.featuresManager;
 
-    BABYLON.SceneLoader.ImportMesh("", "https://github.com/JM33/WebFrameViewer/blob/main/", "waara_frame.glb", scene, function(newMeshes){
-    newMeshes[0].scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
+    const xrTest = fm.enableFeature(BABYLON.WebXRHitTest, "latest");
+
+    const marker = BABYLON.MeshBuilder.CreateTorus('marker', { diameter: 0.15, thickness: 0.05 });
+    marker.isVisible = false;
+    marker.rotationQuaternion = new BABYLON.Quaternion();
+
+    xrTest.onHitTestResultObservable.add((results) => {
+        if (results.length) {
+            marker.isVisible = true;
+            hitTest = results[0];
+            hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
+        } else {
+            marker.isVisible = false;
+        }
     });
 
     return scene;
+
 };
                 window.initFunction = async function() {
                     
