@@ -102,7 +102,7 @@
                 newMeshes[0].scaling = new BABYLON.Vector3(0.01, 0.01, 0.01);
             });
             scene.getMeshByName("frame").metadata = "frame";
-            //frame.isVisible = false;
+            frame.isVisible = false;
             frame.rotationQuaternion = new BABYLON.Quaternion();
             frame.position = new BABYLON.Vector3(0, 0.1, -5);
             //frame.setParent(marker);
@@ -110,7 +110,7 @@
             xrTest.onHitTestResultObservable.add((results) => {
                 if (results.length) {
                     marker.isVisible = true;
-                    frame.isVisible = true;
+                    //frame.isVisible = true;
                     hitTest = results[0];
                     //hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
                     //frame.position = marker.position;
