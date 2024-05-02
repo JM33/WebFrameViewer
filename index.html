@@ -102,7 +102,9 @@
                 newMeshes[0].scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
             });
             scene.getMeshByName("frame").metadata = "frame";
-            frame.isVisible = false;
+            //frame.isVisible = false;
+            frame.rotationQuaternion = new BABYLON.Quaternion();
+            frame.position = new BABYLON.Vector3(0, 0.1, -0.5);
             //frame.setParent(marker);
         
             xrTest.onHitTestResultObservable.add((results) => {
@@ -117,7 +119,7 @@
                     hitTest.transformationMatrix.decompose(frame.scaling, frame.rotationQuaternion, frame.position);
                 } else {
                     //marker.isVisible = false;
-                    frame.isVisible = false;
+                    //frame.isVisible = false;
                 }
             });
             
