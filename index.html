@@ -96,7 +96,7 @@
             marker.isVisible = false;
             marker.rotationQuaternion = new BABYLON.Quaternion();
 
-            await BABYLON.SceneLoader.AppendAsync("", "https://github.com/JM33/WebFrameViewer/blob/main/waara_frame.glb", scene);
+            const frame = await BABYLON.SceneLoader.AppendAsync("", "https://github.com/JM33/WebFrameViewer/blob/main/waara_frame.glb", scene);
 
             //BABYLON.SceneLoader.ImportMesh("", "https://github.com/JM33/WebFrameViewer/blob/main/", "waara_frame.glb", scene, function (newMeshes, particleSystems, skeletons, animationGroups) {
               //  var frame = newMeshes[0];
@@ -119,7 +119,7 @@
                     marker.isVisible = true;
                     hitTest = results[0];
                     hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
-                    myFrame.position = marker.position;
+                    frame.position = marker.position;
                 } else {
                     marker.isVisible = false;
                 }
