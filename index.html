@@ -96,6 +96,9 @@
             scene.getMeshByName("marker").metadata = "marker";
             marker.isVisible = false;
             marker.rotationQuaternion = new BABYLON.Quaternion();
+
+            const frame = BABYLON.SceneLoader.ImportMesh("frame", "https://github.com/JM33/WebFrameViewer/blob/main/", "waara_frame.glb", scene, function (newMeshes) {});
+            frame.isVisible = false;
         
             xrTest.onHitTestResultObservable.add((results) => {
                 if (results.length) {
@@ -109,26 +112,11 @@
                     frame.isVisible = false;
                 }
             });
-            scene.onPointerDown = function castRay(){
-                var ray = scene.createPickingRay(scene.pointerX, scene.pointerY, BABYLON.Matrix.Identity(), camera, false);	
-
-                var hit = scene.pickWithRay(ray);
-
-                console.log("debug");
-
-                if (hit.pickedMesh && hit.pickedMesh.metadata == "marker"){
-                    placeFrame();
-                }
-            }
-
-            const frame = BABYLON.SceneLoader.ImportMesh("frame", "https://github.com/JM33/WebFrameViewer/blob/main/", "waara_frame.glb", scene, function (newMeshes) {});
-            frame.isVisible = false;
             
             
-            function placeFrame(){
-                frame.transformationMatrix = marker.transformationMatrix;
-                frame.isVisible = true;
-            }
+            
+            
+            
         
             return scene;
         
