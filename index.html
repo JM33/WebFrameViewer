@@ -97,11 +97,11 @@
             marker.isVisible = false;
             marker.rotationQuaternion = new BABYLON.Quaternion();
 
-            const frame = BABYLON.SceneLoader.ImportMesh("frame", "https://raw.githubusercontent.com/JM33/WebFrameViewer/main/", "waara_frame.glb", scene, function(newMeshes){
+            const frame = BABYLON.SceneLoader.ImportMesh("frame", "https://github.com/JM33/WebFrameViewer/blob/main/", "waara_frame.glb", scene, function(newMeshes){
                 newMeshes[0].scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
             });
             frame.isVisible = false;
-            //frame.setParent(marker);
+            frame.setParent(marker);
         
             xrTest.onHitTestResultObservable.add((results) => {
                 if (results.length) {
