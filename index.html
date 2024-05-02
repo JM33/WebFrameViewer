@@ -94,7 +94,7 @@
         
             const marker = BABYLON.MeshBuilder.CreateTorus('marker', { diameter: 0.15, thickness: 0.05 });
             scene.getMeshByName("marker").metadata = "marker";
-            marker.isVisible = false;
+            //marker.isVisible = false;
             marker.rotationQuaternion = new BABYLON.Quaternion();
             marker.position = new BABYLON.Vector3(0, 0.1, -0.5);
 
@@ -115,7 +115,7 @@
                     
                     //hitTest.transformationMatrix.decompose(frame.scaling, frame.rotationQuaternion, frame.position);
                 } else {
-                    marker.isVisible = false;
+                    //marker.isVisible = false;
                     //frame.isVisible = false;
                 }
             });
