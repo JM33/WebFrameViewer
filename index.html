@@ -92,7 +92,7 @@
         
             const xrTest = fm.enableFeature(BABYLON.WebXRHitTest, "latest");
         
-            const marker = BABYLON.MeshBuilder.CreateTorus('marker', { diameter: 0.15, thickness: 0.05 });
+            const marker = BABYLON.Mesh.CreateDisc("disc",0.2,64, scene);
             marker.isVisible = false;
             marker.rotationQuaternion = new BABYLON.Quaternion();
         
