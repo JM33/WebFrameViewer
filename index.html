@@ -97,13 +97,29 @@
             marker.rotationQuaternion = new BABYLON.Quaternion();
 
             await BABYLON.SceneLoader.AppendAsync("", "https://github.com/JM33/WebFrameViewer/blob/main/waara_frame.glb", scene);
-    
+
+            BABYLON.SceneLoader.ImportMesh("", "https://github.com/JM33/WebFrameViewer/blob/main/", "waara_frame.glb", scene, function (newMeshes, particleSystems, skeletons, animationGroups) {
+                var frame = newMeshes[0];
+                frame.name = "frame";
+                //Scale the model down        
+                frame.scaling.scaleInPlace(0.1);
+        
+            });
+
+            let myFrame;
+            for(const mesh of scene.meshes) {
+                //do something with your meshes "outside" of the AppendAsync function
+                if(mesh.name = "frame")
+                    myFrame = mesh;
+                //mesh.addRotation(0,0,0.25);
+            }
         
             xrTest.onHitTestResultObservable.add((results) => {
                 if (results.length) {
                     marker.isVisible = true;
                     hitTest = results[0];
                     hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
+                    myFrame.position = marker.position;
                 } else {
                     marker.isVisible = false;
                 }
