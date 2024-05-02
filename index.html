@@ -94,9 +94,9 @@
         
             const marker = BABYLON.MeshBuilder.CreateTorus('marker', { diameter: 0.15, thickness: 0.05 });
             scene.getMeshByName("marker").metadata = "marker";
-            //marker.isVisible = false;
+            marker.isVisible = false;
             marker.rotationQuaternion = new BABYLON.Quaternion();
-            marker.position = new BABYLON.Vector3(0, 0.1, -0.5);
+            //marker.position = new BABYLON.Vector3(0, 0.1, -0.5);
 
             const frame = BABYLON.SceneLoader.ImportMesh("frame", "https://github.com/JM33/WebFrameViewer/blob/main/", "waara_frame.glb", scene, function(newMeshes){
                 newMeshes[0].scaling = new BABYLON.Vector3(0.01, 0.01, 0.01);
@@ -112,13 +112,13 @@
                     marker.isVisible = true;
                     //frame.isVisible = true;
                     hitTest = results[0];
-                    //hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
+                    hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
                     //frame.position = marker.position;
                     //frame.rotationQuaternion = marker.rotationQuaternion;
                     
                     //hitTest.transformationMatrix.decompose(frame.scaling, frame.rotationQuaternion, frame.position);
                 } else {
-                    //marker.isVisible = false;
+                    marker.isVisible = false;
                     //frame.isVisible = false;
                 }
             });
