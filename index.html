@@ -99,7 +99,7 @@
 
             const frame = BABYLON.SceneLoader.ImportMesh("frame", "https://github.com/JM33/WebFrameViewer/blob/main/", "waara_frame.glb", scene, function (newMeshes) {});
             frame.isVisible = false;
-            frame.setParent(marker);
+            //frame.setParent(marker);
         
             xrTest.onHitTestResultObservable.add((results) => {
                 if (results.length) {
@@ -107,7 +107,7 @@
                     frame.isVisible = true
                     hitTest = results[0];
                     hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
-                    //hitTest.transformationMatrix.decompose(frame.scaling, frame.rotationQuaternion, frame.position);
+                    hitTest.transformationMatrix.decompose(frame.scaling, frame.rotationQuaternion, frame.position);
                 } else {
                     marker.isVisible = false;
                     frame.isVisible = false;
