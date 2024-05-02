@@ -106,9 +106,12 @@
             xrTest.onHitTestResultObservable.add((results) => {
                 if (results.length) {
                     marker.isVisible = true;
-                    //frame.isVisible = true;
+                    frame.isVisible = true;
                     hitTest = results[0];
                     hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
+                    frame.position = marker.position;
+                    frame.rotationQuaternion = marker.rotatiinQuaternion;
+                    
                     //hitTest.transformationMatrix.decompose(frame.scaling, frame.rotationQuaternion, frame.position);
                 } else {
                     marker.isVisible = false;
