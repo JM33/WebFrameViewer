@@ -98,25 +98,25 @@
             marker.rotationQuaternion = new BABYLON.Quaternion();
             marker.position = new BABYLON.Vector3(0, 0.1, -0.5);
 
-            BABYLON.SceneLoader.ImportMesh("", "https://github.com/JM33/WebFrameViewer/blob/main/", "waara_frame.glb", scene, function(newMeshes){
+            const frame = BABYLON.SceneLoader.ImportMesh("", "https://github.com/JM33/WebFrameViewer/blob/main/", "waara_frame.glb", scene, function(newMeshes){
                 newMeshes[0].scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
             });
-            //frame.isVisible = false;
+            frame.isVisible = false;
             //frame.setParent(marker);
         
             xrTest.onHitTestResultObservable.add((results) => {
                 if (results.length) {
                     marker.isVisible = true;
-                    //frame.isVisible = true;
+                    frame.isVisible = true;
                     hitTest = results[0];
                     //hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
                     //frame.position = marker.position;
                     //frame.rotationQuaternion = marker.rotationQuaternion;
                     
-                    //hitTest.transformationMatrix.decompose(frame.scaling, frame.rotationQuaternion, frame.position);
+                    hitTest.transformationMatrix.decompose(frame.scaling, frame.rotationQuaternion, frame.position);
                 } else {
                     //marker.isVisible = false;
-                    //frame.isVisible = false;
+                    frame.isVisible = false;
                 }
             });
             
