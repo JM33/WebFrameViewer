@@ -101,7 +101,7 @@
                 newMeshes[0].scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
             });
             frame.isVisible = false;
-            frame.setParent(marker);
+            //frame.setParent(marker);
         
             xrTest.onHitTestResultObservable.add((results) => {
                 if (results.length) {
@@ -109,7 +109,7 @@
                     frame.isVisible = true;
                     hitTest = results[0];
                     hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
-                    //hitTest.transformationMatrix.decompose(frame.scaling, frame.rotationQuaternion, frame.position);
+                    hitTest.transformationMatrix.decompose(frame.scaling, frame.rotationQuaternion, frame.position);
                 } else {
                     marker.isVisible = false;
                     frame.isVisible = false;
