@@ -98,9 +98,10 @@
             marker.rotationQuaternion = new BABYLON.Quaternion();
             marker.position = new BABYLON.Vector3(0, 0.1, -0.5);
 
-            const frame = BABYLON.SceneLoader.ImportMesh("", "https://github.com/JM33/WebFrameViewer/blob/main/", "waara_frame.glb", scene, function(newMeshes){
+            const frame = BABYLON.SceneLoader.ImportMesh("frame", "https://github.com/JM33/WebFrameViewer/blob/main/", "waara_frame.glb", scene, function(newMeshes){
                 newMeshes[0].scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
             });
+            scene.getMeshByName("frame").metadata = "frame";
             frame.isVisible = false;
             //frame.setParent(marker);
         
