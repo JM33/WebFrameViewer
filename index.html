@@ -96,6 +96,7 @@
             scene.getMeshByName("marker").metadata = "marker";
             marker.isVisible = false;
             marker.rotationQuaternion = new BABYLON.Quaternion();
+            marker.position = new BABYLON.Vector3(0, 0.1, -0.5);
 
             BABYLON.SceneLoader.ImportMesh("", "https://github.com/JM33/WebFrameViewer/blob/main/", "waara_frame.glb", scene, function(newMeshes){
                 newMeshes[0].scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
@@ -108,7 +109,7 @@
                     marker.isVisible = true;
                     //frame.isVisible = true;
                     hitTest = results[0];
-                    hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
+                    //hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
                     //frame.position = marker.position;
                     //frame.rotationQuaternion = marker.rotationQuaternion;
                     
