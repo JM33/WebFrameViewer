@@ -97,10 +97,9 @@
             marker.rotationQuaternion = new BABYLON.Quaternion();
 
             var frame = new BABYLON.Mesh("frame");
-            BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/JM33/WebFrameViewer/main/", "waara_frame.glb", scene, function (meshes) {          
-                
-                frame = meshes[0]; 
-                
+            BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/JM33/WebFrameViewer/main/", "waara_frame.glb", scene, function(newMeshes){
+                newMeshes[0].scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
+                frame = newMeshes[0];
             });
             //frame.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
             //await BABYLON.SceneLoader.AppendAsync("", "https://github.com/JM33/WebFrameViewer/blob/main/waara_frame.glb", scene);
