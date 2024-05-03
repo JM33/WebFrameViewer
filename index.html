@@ -254,8 +254,7 @@
                                 isFramePlaced = true;
                                 marker.isVisible = false;
                                 frame.isVisible = true;
-                                frame.position = marker.position;
-                                frame.rotationQuaternion = marker.rotationQuaternion;
+                                frame.parent = marker;
                             }
                         }
         				break;
