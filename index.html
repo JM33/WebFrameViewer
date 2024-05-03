@@ -103,10 +103,7 @@
                 
             //});
             //frame.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
-            await BABYLON.SceneLoader.AppendAsync("", "https://github.com/JM33/WebFrameViewer/blob/main/waara_frame.glb", scene, function (meshes) {          
-                
-                frame = meshes[0]; 
-            });
+            await BABYLON.SceneLoader.AppendAsync("", "https://github.com/JM33/WebFrameViewer/blob/main/waara_frame.glb", scene);
             
             
             // The first parameter can be used to specify which mesh to import. Here we import all meshes
