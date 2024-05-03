@@ -123,7 +123,7 @@
                     frame.isVisible = true;
                     hitTest = results[0];
                     hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
-                    hitTest.transformationMatrix.decompose(frame.scaling, frame.rotationQuaternion, frame.position);
+                    frame.position = marker.position;
                     
                 } else {
                     marker.isVisible = false;
