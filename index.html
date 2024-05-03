@@ -99,7 +99,7 @@
             var frame = new BABYLON.Mesh("frame");
             BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/JM33/WebFrameViewer/main/", "waara_frame.glb", scene, function(newMeshes){
                 newMeshes[0].scaling = new BABYLON.Vector3(0.0254, 0.0254, 0.0254);
-                newMeashes.addRotation(1,0,0);
+                newMeshes.addRotation(1,0,0);
                 frame = newMeshes[0];
                 frame.isVisible = false;
                 //frame.setParent(marker);
@@ -126,7 +126,7 @@
                     hitTest = results[0];
                     hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
                     frame.setParent(marker);
-                    frame.addRotation(1,0,0);
+                    //frame.addRotation(1,0,0);
                 } else {
                     marker.isVisible = false;
                     frame.isVisible = false;
