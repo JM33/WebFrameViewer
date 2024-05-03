@@ -99,10 +99,10 @@
             var frame = new BABYLON.Mesh("frame");
             BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/JM33/WebFrameViewer/main/", "waara_frame.glb", scene, function (meshes) {          
                 
-                boomB = meshes[0]; 
+                frame = meshes[0]; 
                 
             });
-            boomB.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
+            frame.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
             //await BABYLON.SceneLoader.AppendAsync("", "https://github.com/JM33/WebFrameViewer/blob/main/waara_frame.glb", scene);
             
             
