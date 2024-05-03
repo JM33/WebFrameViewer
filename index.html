@@ -97,8 +97,8 @@
             cyanMat.specularColor = new BABYLON.Color3(0.03, 0.92, 0.95);
             cyanMat.emissiveColor = new BABYLON.Color3.Teal();
 
-            var discRadius = 0.1;
-            var armsRadius = 0.2;
+            var discRadius = 0.0375;
+            var armsRadius = 0.1;
             const marker = BABYLON.MeshBuilder.CreateDisc("disc", {radius: discRadius, tessellation: 64}, scene);
             marker.material = cyanMat;
             marker.rotationQuaternion = new BABYLON.Quaternion();
@@ -126,7 +126,7 @@
             marker.rotationQuaternion = new BABYLON.Quaternion();
             marker.addRotation(0, BABYLON.Tools.ToRadians(180), BABYLON.Tools.ToRadians(-10));
 
-            
+            var reticle = new mesh[]{marker, markerNorth, markerSouth};
             //const marker = BABYLON.MeshBuilder.CreateTorus('marker', { diameter: 0.15, thickness: 0.05 });
             //marker.scaling = new BABYLON.Vector3(1, 0.1, 1);
             //marker.material = cyanMat;
@@ -168,6 +168,8 @@
             xrTest.onHitTestResultObservable.add((results) => {
                 if (results.length) {
                     marker.isVisible = true;
+                    foreach(mesh in reticle){
+                        mesh.isVisible = true;
                     //frame.isVisible = true;
                     hitTest = results[0];
                     hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
@@ -175,6 +177,8 @@
                     
                 } else {
                     marker.isVisible = false;
+                    foreach(mesh in reticle){
+                        mesh.isVisible = false;
                     frame.isVisible = false;
                 }
             });
