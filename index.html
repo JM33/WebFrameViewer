@@ -157,30 +157,28 @@
             //    camera.target = result.meshes[0];
             //})
 
-            /************************************Touch Controls****************************************/
-
-
-
-
-
+            
 
 
 
             /************************************AR Hit Test****************************************/
-        
+
+            var isFramePlaced = false;
+            
             xrTest.onHitTestResultObservable.add((results) => {
                 if (results.length) {
-                    marker.isVisible = true;
-                    markerNorth.isVisible = true;
-                    markerEast.isVisible = true;
-                    markerSouth.isVisible = true;
-                    markerWest.isVisible = true;
-                    //frame.isVisible = true;
-                    hitTest = results[0];
-                    hitTest.transformationMatrix.decompose(markerObject.scaling, markerObject.rotationQuaternion, markerObject.position);
-                    
-                    //frame.setParent(marker);
-                    
+                    if(!isFramePlaced){
+                        marker.isVisible = true;
+                        markerNorth.isVisible = true;
+                        markerEast.isVisible = true;
+                        markerSouth.isVisible = true;
+                        markerWest.isVisible = true;
+                        //frame.isVisible = true;
+                        hitTest = results[0];
+                        hitTest.transformationMatrix.decompose(markerObject.scaling, markerObject.rotationQuaternion, markerObject.position);
+                        
+                        //frame.setParent(marker);
+                    }
                 } else {
                     marker.isVisible = false;
                     markerNorth.isVisible = false;
@@ -188,6 +186,84 @@
                     markerSouth.isVisible = false;
                     markerWest.isVisible = false;
                     frame.isVisible = false;
+                }
+            });
+
+
+
+
+            /************************************Touch Controls****************************************/
+
+            
+            
+            var startingPoint;
+            var currentMesh;
+        
+            var getGroundPosition = function () {
+                var pickinfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return mesh == ground; });
+                if (pickinfo.hit) {
+                    return pickinfo.pickedPoint;
+                }
+        
+                return null;
+            }
+        
+            var pointerDown = function (mesh) {
+                    currentMesh = mesh;
+                    startingPoint = getGroundPosition();
+                    if (startingPoint) { // we need to disconnect camera from canvas
+                        setTimeout(function () {
+                            camera.detachControl(canvas);
+                        }, 0);
+                    }
+            }
+        
+            var pointerUp = function () {
+                if (startingPoint) {
+                    camera.attachControl(canvas, true);
+                    startingPoint = null;
+                    return;
+                }
+            }
+        
+            var pointerMove = function () {
+                if (!startingPoint) {
+                    return;
+                }
+                var current = getGroundPosition();
+                if (!current) {
+                    return;
+                }
+        
+                var diff = current.subtract(startingPoint);
+                currentMesh.position.addInPlace(diff);
+        
+                startingPoint = current;
+        
+            }
+            
+            scene.onPointerObservable.add((pointerInfo) => {      		
+                switch (pointerInfo.type) {
+        			case BABYLON.PointerEventTypes.POINTERDOWN:
+                        if(isFramePlaced){
+                            if(pointerInfo.pickInfo.hit && pointerInfo.pickInfo.pickedMesh != ground) {
+                                pointerDown(pointerInfo.pickInfo.pickedMesh)
+                            }
+                        }else{
+            				if(marker.isVisible){
+                                marker.isVisible = false;
+                                frame.isVisible = true;
+                                frame.position = marker.position;
+                                frame.rotationQuaternion = marker.rotationQuaternion;
+                            }
+                        }
+        				break;
+        			case BABYLON.PointerEventTypes.POINTERUP:
+                            pointerUp();
+        				break;
+        			case BABYLON.PointerEventTypes.POINTERMOVE:          
+                            pointerMove();
+        				break;
                 }
             });
         
