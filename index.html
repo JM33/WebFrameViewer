@@ -100,8 +100,9 @@
             BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/JM33/WebFrameViewer/main/", "waara_frame.glb", scene, function(newMeshes){
                 newMeshes[0].scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
                 frame = newMeshes[0];
+                frame.isVisible = false;
             });
-            frame.isVisible = false;
+            
             //frame.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
             //await BABYLON.SceneLoader.AppendAsync("", "https://github.com/JM33/WebFrameViewer/blob/main/waara_frame.glb", scene);
             
@@ -119,11 +120,14 @@
             xrTest.onHitTestResultObservable.add((results) => {
                 if (results.length) {
                     marker.isVisible = true;
+                    frame.isVisible = true;
                     hitTest = results[0];
                     hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
                     hitTest.transformationMatrix.decompose(frame.scaling, frame.rotationQuaternion, frame.position);
+                    
                 } else {
                     marker.isVisible = false;
+                    frame.isVisible = false;
                 }
             });
         
