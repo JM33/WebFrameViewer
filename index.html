@@ -96,17 +96,42 @@
             cyanMat.diffuseColor = new BABYLON.Color3(0.03, 0.92, 0.95);
             cyanMat.specularColor = new BABYLON.Color3(0.03, 0.92, 0.95);
             cyanMat.emissiveColor = new BABYLON.Color3.Teal();
-            
-            //const marker = BABYLON.MeshBuilder.CreateDisc("disc", {radius: 0.15, tessellation: 64}, scene);
-            //marker.material = cyanMat;
-            //marker,isVisible = false;
-            //marker.rotationQuaternion = new BABYLON.Quaternion();
-            
-            const marker = BABYLON.MeshBuilder.CreateTorus('marker', { diameter: 0.15, thickness: 0.05 });
-            marker.scaling = new BABYLON.Vector3(1, 0.1, 1);
+
+            var discRadius = 0.1;
+            var armsRadius = 0.2;
+            const marker = BABYLON.MeshBuilder.CreateDisc("disc", {radius: discRadius, tessellation: 64}, scene);
             marker.material = cyanMat;
-            marker.isVisible = false;
             marker.rotationQuaternion = new BABYLON.Quaternion();
+        
+            const markerNorth = BABYLON.MeshBuilder.CreateDisc("discN", {radius: armsRadius, tessellation: 64, arc: 0.05}, scene);
+            markerNorth.material = cyanMat;
+            markerNorth.addRotation(0, 0, BABYLON.Tools.ToRadians(180));  
+            markerNorth.parent = marker;
+        
+            const markerSouth = BABYLON.MeshBuilder.CreateDisc("discN", {radius: armsRadius, tessellation: 64, arc: 0.05}, scene);
+            markerSouth.material = cyanMat;
+            markerSouth.addRotation(0, 0, 0);
+            markerSouth.parent = marker;
+        
+            const markerEast = BABYLON.MeshBuilder.CreateDisc("discN", {radius: armsRadius, tessellation: 64, arc: 0.05}, scene);
+            markerEast.material = cyanMat; 
+            markerEast.addRotation(0, 0, BABYLON.Tools.ToRadians(90));  
+            markerEast.parent = marker;
+        
+            const markerWest = BABYLON.MeshBuilder.CreateDisc("discN", {radius: armsRadius, tessellation: 64, arc: 0.05}, scene);
+            markerWest.material = cyanMat;
+            markerWest.addRotation(0, 0, BABYLON.Tools.ToRadians(270));
+            markerWest.parent = marker;
+        
+            marker.rotationQuaternion = new BABYLON.Quaternion();
+            marker.addRotation(0, BABYLON.Tools.ToRadians(180), BABYLON.Tools.ToRadians(-10));
+
+            
+            //const marker = BABYLON.MeshBuilder.CreateTorus('marker', { diameter: 0.15, thickness: 0.05 });
+            //marker.scaling = new BABYLON.Vector3(1, 0.1, 1);
+            //marker.material = cyanMat;
+            //marker.isVisible = false;
+            //marker.rotationQuaternion = new BABYLON.Quaternion();
 
             var frame = new BABYLON.Mesh("frame");
             BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/JM33/WebFrameViewer/main/", "waara_frame.glb", scene, function(newMeshes){
