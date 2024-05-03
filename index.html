@@ -104,7 +104,7 @@
                 //frame.isVisible = false;
                 frame.setParent(marker);
             });
-            
+            frame.addRotation(Math.PI/2,0,0);
             //frame.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
             //await BABYLON.SceneLoader.AppendAsync("", "https://github.com/JM33/WebFrameViewer/blob/main/waara_frame.glb", scene);
             
@@ -126,7 +126,7 @@
                     hitTest = results[0];
                     hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
                     frame.setParent(marker);
-                    frame.addRotation(Math.PI/2,0,0);
+                    
                 } else {
                     marker.isVisible = false;
                     frame.isVisible = false;
