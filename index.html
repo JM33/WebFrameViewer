@@ -107,11 +107,6 @@
             });
 
             
-            for(const mesh of scene.meshes) {
-                //do something with your meshes "outside" of the AppendAsync function
-                if(mesh.name = "frame")
-                mesh.addRotation(0,1,0);
-            }
         
             xrTest.onHitTestResultObservable.add((results) => {
                 if (results.length) {
