@@ -91,10 +91,20 @@
             const fm = xr.baseExperience.featuresManager;
         
             const xrTest = fm.enableFeature(BABYLON.WebXRHitTest, "latest");
-        
-            const marker = BABYLON.MeshBuilder.CreateTorus('marker', { diameter: 0.15, thickness: 0.05 });
-            marker.isVisible = false;
+
+            var cyanMat = new BABYLON.StandardMaterial("ground", scene);
+            cyanMat.diffuseColor = new BABYLON.Color3(0.03, 0.92, 0.95);
+            cyanMat.specularColor = new BABYLON.Color3(0.03, 0.92, 0.95);
+            cyanMat.emissiveColor = new BABYLON.Color3.Teal();
+            
+            const marker = BABYLON.MeshBuilder.CreateDisc("disc", {radius: 0.15, tessellation: 64}, scene);
+            marker.material = cyanMat;
+            marker,isVisible = false;
             marker.rotationQuaternion = new BABYLON.Quaternion();
+            
+            //const marker = BABYLON.MeshBuilder.CreateTorus('marker', { diameter: 0.15, thickness: 0.05 });
+            //marker.isVisible = false;
+            //marker.rotationQuaternion = new BABYLON.Quaternion();
 
             var frame = new BABYLON.Mesh("frame");
             BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/JM33/WebFrameViewer/main/", "waara_frame.glb", scene, function(newMeshes){
