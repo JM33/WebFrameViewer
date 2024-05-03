@@ -126,7 +126,7 @@
             marker.rotationQuaternion = new BABYLON.Quaternion();
             marker.addRotation(BABYLON.Tools.ToRadians(90), BABYLON.Tools.ToRadians(180), BABYLON.Tools.ToRadians(-10));
 
-            var reticle = new mesh[marker, markerNorth, markerSouth];
+            
             //const marker = BABYLON.MeshBuilder.CreateTorus('marker', { diameter: 0.15, thickness: 0.05 });
             //marker.scaling = new BABYLON.Vector3(1, 0.1, 1);
             //marker.material = cyanMat;
@@ -168,8 +168,10 @@
             xrTest.onHitTestResultObservable.add((results) => {
                 if (results.length) {
                     marker.isVisible = true;
-                    foreach(mesh in reticle){
-                        mesh.isVisible = true;
+                    markerNorth.isVisible = true;
+                    markerEast.isVisible = true;
+                    markerSouth.isVisible = true;
+                    markerWest.isVisible = true;
                     //frame.isVisible = true;
                     hitTest = results[0];
                     hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
@@ -177,8 +179,10 @@
                     
                 } else {
                     marker.isVisible = false;
-                    foreach(mesh in reticle){
-                        mesh.isVisible = false;
+                    markerNorth.isVisible = false;
+                    markerEast.isVisible = false;
+                    markerSouth.isVisible = false;
+                    markerWest.isVisible = false;
                     frame.isVisible = false;
                 }
             });
