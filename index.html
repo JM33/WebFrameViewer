@@ -124,7 +124,7 @@
             markerWest.parent = marker;
         
             marker.rotationQuaternion = new BABYLON.Quaternion();
-            marker.addRotation(0, BABYLON.Tools.ToRadians(180), BABYLON.Tools.ToRadians(-10));
+            marker.addRotation(BABYLON.Tools.ToRadians(90), BABYLON.Tools.ToRadians(180), BABYLON.Tools.ToRadians(-10));
 
             const markerObject = new BABYLON.Mesh("markerObject");
             markerObject.rotationQuaternion = new BABYLON.Quaternion();
