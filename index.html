@@ -119,7 +119,8 @@
                     marker.isVisible = true;
                     hitTest = results[0];
                     hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
-                    myFrame.position = marker.position;
+                    var framedArt = scene.getMeshByName("frame");
+                    framedArt.position = marker.position;
                 } else {
                     marker.isVisible = false;
                 }
