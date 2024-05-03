@@ -124,7 +124,7 @@
             markerWest.parent = marker;
         
             marker.rotationQuaternion = new BABYLON.Quaternion();
-            marker.addRotation(0, BABYLON.Tools.ToRadians(180), BABYLON.Tools.ToRadians(-10));
+            marker.addRotation(BABYLON.Tools.ToRadians(90), BABYLON.Tools.ToRadians(180), BABYLON.Tools.ToRadians(-10));
 
             var reticle = new mesh[]{marker, markerNorth, markerSouth};
             //const marker = BABYLON.MeshBuilder.CreateTorus('marker', { diameter: 0.15, thickness: 0.05 });
