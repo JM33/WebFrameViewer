@@ -101,6 +101,7 @@
                 newMeshes[0].scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
                 frame = newMeshes[0];
                 frame.isVisible = false;
+                frame.setParent(marker):
             });
             
             //frame.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
@@ -123,7 +124,6 @@
                     frame.isVisible = true;
                     hitTest = results[0];
                     hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
-                    frame.position = marker.position;
                     
                 } else {
                     marker.isVisible = false;
