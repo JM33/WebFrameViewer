@@ -99,7 +99,7 @@
             //await BABYLON.SceneLoader.AppendAsync("", "https://github.com/JM33/WebFrameViewer/blob/main/waara_frame.glb", scene);
             
             // The first parameter can be used to specify which mesh to import. Here we import all meshes
-            const resultPromise = BABYLON.SceneLoader.ImportMeshAsync("", "https://github.com/JM33/WebFrameViewer/blob/main/", "waara_frame.glb", scene);
+            const resultPromise = BABYLON.SceneLoader.ImportMeshAsync("", "https://raw.githubusercontent.com/JM33/WebFrameViewer/main/", "waara_frame.glb", scene);
             
             // Result has meshes, particleSystems, skeletons, animationGroups and transformNodes
             resultPromise.then((result) => {
