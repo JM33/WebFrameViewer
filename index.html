@@ -126,7 +126,7 @@
                     hitTest = results[0];
                     hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
                     frame.setParent(marker);
-                    //frame.addRotation(1,0,0);
+                    frame.addRotation(Math.PI/2,0,0);
                 } else {
                     marker.isVisible = false;
                     frame.isVisible = false;
