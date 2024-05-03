@@ -106,7 +106,7 @@
         
             });
 
-            var myFrame;
+            let myFrame;
             for(const mesh of scene.meshes) {
                 //do something with your meshes "outside" of the AppendAsync function
                 if(mesh.name = "frame")
@@ -119,7 +119,7 @@
                     marker.isVisible = true;
                     hitTest = results[0];
                     hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
-                    scene.getMeshyName("frame").position = marker.position;
+                    myFrame.position = marker.position;
                 } else {
                     marker.isVisible = false;
                 }
