@@ -99,10 +99,10 @@
             //await BABYLON.SceneLoader.AppendAsync("", "https://github.com/JM33/WebFrameViewer/blob/main/waara_frame.glb", scene);
             
             await BABYLON.SceneLoader.AppendAsync("", "https://raw.githubusercontent.com/JM33/WebFrameViewer/main/", "waara_frame.glb", scene, function (newMeshes, particleSystems, skeletons, animationGroups) {
-                var frame = newMeshes[0];
-                frame.name = "frame";
+                var hero = newMeshes[0];
+                hero.name = "frame";
                 //Scale the model down        
-                frame.scaling.scaleInPlace(0.1);
+                hero.scaling.scaleInPlace(0.1);
         
             });
 
