@@ -190,7 +190,7 @@
                                 let focusQuat = BABYLON.Quaternion.LookRotation(focusPoint.subtract(markerObject.position));   // rotation quaternion to local lookAt point
                                 focusQuat = new BABYLON.Quaternion(0, 0, focusQuat.z, focusQuat.w); // only use values of z-axis rotation
                                 
-                                markerObject.rotationQuaternion = focusQuat;
+                                //markerObject.rotationQuaternion = focusQuat;
                         //frame.setParent(marker);
                     }
                 } else {
