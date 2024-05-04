@@ -97,6 +97,12 @@
             cyanMat.specularColor = new BABYLON.Color3(0.03, 0.92, 0.95);
             cyanMat.emissiveColor = new BABYLON.Color3.Teal();
 
+            var redMat = new BABYLON.StandardMaterial("ground", scene);
+            redMat.diffuseColor = new BABYLON.Color3(0.4, 0.4, 0.4);
+            redMat.specularColor = new BABYLON.Color3(0.4, 0.4, 0.4);
+            redMat.emissiveColor = new BABYLON.Color3.Red();
+
+            
             var discRadius = 0.0375;
             var armsRadius = 0.1;
             const marker = BABYLON.MeshBuilder.CreateDisc("disc", {radius: discRadius, tessellation: 64}, scene);
@@ -104,7 +110,7 @@
             marker.rotationQuaternion = new BABYLON.Quaternion();
         
             const markerNorth = BABYLON.MeshBuilder.CreateDisc("discN", {radius: armsRadius, tessellation: 64, arc: 0.05}, scene);
-            markerNorth.material = cyanMat;
+            markerNorth.material = redMat;
             markerNorth.addRotation(0, 0, BABYLON.Tools.ToRadians(180));  
             markerNorth.parent = marker;
         
