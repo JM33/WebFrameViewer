@@ -266,7 +266,7 @@
                             
                                 let focusPoint = dirVector.add(marker.position);   // absolute lookAt point
                                 let focusQuat = BABYLON.Quaternion.LookRotation(focusPoint.subtract(marker.position));   // rotation quaternion to local lookAt point
-                                focusQuat = new BABYLON.Quaternion(0, focusQuat.y, 0, focusQuat.w); // only use values of z-axis rotation
+                                focusQuat = new BABYLON.Quaternion(0, 0, focusQuat.z, focusQuat.w); // only use values of z-axis rotation
                                 
                                 marker.rotationQuaternion = focusQuat;
 
@@ -283,10 +283,10 @@
                 }
             });
 
-            BABYLON.Quaternion.LookRotation = function(pos, up=BABYLON.Vector3.Up()) 
+            BABYLON.Quaternion.LookRotation = function(pos, fwd=BABYLON.Vector3.Forward()) 
             {
                 let result = BABYLON.Matrix.Zero();
-                BABYLON.Matrix.LookAtLHToRef(BABYLON.Vector3.Zero(), pos, up, result);
+                BABYLON.Matrix.LookAtLHToRef(BABYLON.Vector3.Zero(), pos, fwd, result);
                 result.invert();
                 return BABYLON.Quaternion.FromRotationMatrix(result);
             };
