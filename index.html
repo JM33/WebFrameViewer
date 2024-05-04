@@ -260,7 +260,7 @@
                                 isFramePlaced = true;
                                 marker.isVisible = false;
                                 frame.isVisible = true;
-                                frame.parent = marker;
+                                frame.position = marker.position;
 
                                 let meshVector = frame.up;
                                 let dirVector = new BABYLON.Vector3(0,1,0);
@@ -269,7 +269,6 @@
                                 let focusQuat = BABYLON.Quaternion.LookRotation(focusPoint.subtract(frame.position));   // rotation quaternion to local lookAt point
                                 focusQuat = new BABYLON.Quaternion(0, 0, focusQuat.z, focusQuat.w); // only use values of z-axis rotation
 
-                                frame.paremt = null;
                                 frame.rotationQuaternion = focusQuat;
                             }
                         }
