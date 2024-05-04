@@ -267,7 +267,7 @@
                             
                                 let focusPoint = dirVector.add(frame.position);   // absolute lookAt point
                                 let focusQuat = BABYLON.Quaternion.LookRotation(focusPoint.subtract(frame.position));   // rotation quaternion to local lookAt point
-                                focusQuat = new BABYLON.Quaternion(0, focusQuat.y, 0, focusQuat.w); // only use values of z-axis rotation
+                                focusQuat = new BABYLON.Quaternion(0, 0, focusQuat.z, focusQuat.w); // only use values of z-axis rotation
                                 frame.rotationQuaternion = focusQuat;
                             }
                         }
