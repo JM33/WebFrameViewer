@@ -274,6 +274,8 @@
                                 var local_pos = new BABYLON.Vector3(0, 0, 0); //top middle of box relative to box
                                 var global_pos = BABYLON.Vector3.TransformCoordinates(local_pos, matrix); //calculate world position
 
+                                frame.position = global_pos; //position sphere relative to world
+                                
                                 var newRight = BABYLON.Vector3.Cross(BABYLON.Vector3.Up(), new BABYLON.Vector3(matrix[8], matrix[9], matrix[10]));
                                 
                                 let sourceMatrix = BABYLON.Matrix.FromValues(matrix[0], matrix[1], matrix[2], 0, 
@@ -284,7 +286,7 @@
                                 let frameMatrix = frame.getWorldMatrix();
                                 frameMatrix.copyFrom( sourceMatrix );
                                 
-                                frame.position = global_pos; //position sphere relative to world
+                                
 
                                 //frame.parent = marker;
                             }
