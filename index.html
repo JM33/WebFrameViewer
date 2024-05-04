@@ -260,7 +260,7 @@
                 switch (pointerInfo.type) {
         			case BABYLON.PointerEventTypes.POINTERDOWN:
                         if(isFramePlaced){
-                            if(pointerInfo.pickInfo.hit && pointerInfo.pickInfo.pickedMesh != ground) {
+                            if(pointerInfo.pickInfo.hit) {
                                 pointerDown(pointerInfo.pickInfo.pickedMesh)
                             }
                         }else{
