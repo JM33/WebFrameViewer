@@ -283,7 +283,7 @@
                 }
             });
 
-            BABYLON.Quaternion.LookRotation = function(pos, up=BABYLON.Vector3.up()) 
+            BABYLON.Quaternion.LookRotation = function(pos, up=BABYLON.Vector3.Up()) 
             {
                 let result = BABYLON.Matrix.Zero();
                 BABYLON.Matrix.LookAtLHToRef(BABYLON.Vector3.Zero(), pos, up, result);
