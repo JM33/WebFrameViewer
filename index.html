@@ -269,9 +269,12 @@
                                 marker.isVisible = false;
                                 frame.isVisible = true;
                                 
-                                
+                                var matrix = marker.computeWorldMatrix(true);  // force calculation of world matrix
+                                var local_pos = new BABYLON.Vector3(0, 0, 0); //top middle of box relative to box
+                                var global_pos = BABYLON.Vector3.TransformCoordinates(local_pos, matrix); //calculate world position
+                                frame.position = global_pos; //position sphere relative to world
 
-                                frame.parent = marker;
+                                //frame.parent = marker;
                             }
                         }
         				break;
