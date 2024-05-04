@@ -111,22 +111,22 @@
         
             const markerNorth = BABYLON.MeshBuilder.CreateDisc("discN", {radius: armsRadius, tessellation: 64, arc: 0.05}, scene);
             markerNorth.material = redMat;
-            markerNorth.addRotation(0, 0, BABYLON.Tools.ToRadians(180));  
+            markerNorth.addRotation(0, 0, BABYLON.Tools.ToRadians(270));  
             markerNorth.parent = marker;
         
             const markerSouth = BABYLON.MeshBuilder.CreateDisc("discN", {radius: armsRadius, tessellation: 64, arc: 0.05}, scene);
             markerSouth.material = cyanMat;
-            markerSouth.addRotation(0, 0, 0);
+            markerSouth.addRotation(0, 0, BABYLON.Tools.ToRadians(90));
             markerSouth.parent = marker;
         
             const markerEast = BABYLON.MeshBuilder.CreateDisc("discN", {radius: armsRadius, tessellation: 64, arc: 0.05}, scene);
             markerEast.material = cyanMat; 
-            markerEast.addRotation(0, 0, BABYLON.Tools.ToRadians(90));  
+            markerEast.addRotation(0, 0, 0);  
             markerEast.parent = marker;
         
             const markerWest = BABYLON.MeshBuilder.CreateDisc("discN", {radius: armsRadius, tessellation: 64, arc: 0.05}, scene);
             markerWest.material = cyanMat;
-            markerWest.addRotation(0, 0, BABYLON.Tools.ToRadians(270));
+            markerWest.addRotation(0, 0, BABYLON.Tools.ToRadians(180));
             markerWest.parent = marker;
         
             marker.rotationQuaternion = new BABYLON.Quaternion();
