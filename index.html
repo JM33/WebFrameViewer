@@ -260,7 +260,7 @@
                                 isFramePlaced = true;
                                 marker.isVisible = false;
                                 frame.isVisible = true;
-                                frame.position = marker.position;
+                                frame.position = new BABYLON.Vector3(marker.position.x, marker.position.y, marker.position.z);
 
                                 let meshVector = frame.up;
                                 let dirVector = new BABYLON.Vector3(0,1,0);
