@@ -182,7 +182,15 @@
                         //frame.isVisible = true;
                         hitTest = results[0];
                         hitTest.transformationMatrix.decompose(markerObject.scaling, markerObject.rotationQuaternion, markerObject.position);
-                        
+
+                        let meshVector = marker.up;
+                                let dirVector = new BABYLON.Vector3(0,1,0);
+                            
+                                let focusPoint = dirVector.add(marker.position);   // absolute lookAt point
+                                let focusQuat = BABYLON.Quaternion.LookRotation(focusPoint.subtract(marker.position));   // rotation quaternion to local lookAt point
+                                focusQuat = new BABYLON.Quaternion(0, 0, focusQuat.z, focusQuat.w); // only use values of z-axis rotation
+                                
+                                marker.rotationQuaternion = focusQuat;
                         //frame.setParent(marker);
                     }
                 } else {
@@ -261,14 +269,7 @@
                                 marker.isVisible = false;
                                 frame.isVisible = true;
                                 
-                                let meshVector = marker.up;
-                                let dirVector = new BABYLON.Vector3(0,1,0);
-                            
-                                let focusPoint = dirVector.add(marker.position);   // absolute lookAt point
-                                let focusQuat = BABYLON.Quaternion.LookRotation(focusPoint.subtract(marker.position));   // rotation quaternion to local lookAt point
-                                focusQuat = new BABYLON.Quaternion(0, 0, focusQuat.z, focusQuat.w); // only use values of z-axis rotation
                                 
-                                marker.rotationQuaternion = focusQuat;
 
                                 frame.parent = marker;
                             }
