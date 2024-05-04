@@ -281,8 +281,8 @@
                                                                              newRight.x, newRight.y, newRight.z, 0,
                                                                              0, 0, 1);
 
-                                let matrix = frame.getWorldMatrix();
-                                matrix.copyFrom( sourceMatrix );
+                                let frameMatrix = frame.getWorldMatrix();
+                                frameMatrix.copyFrom( sourceMatrix );
                                 
                                 frame.position = global_pos; //position sphere relative to world
 
