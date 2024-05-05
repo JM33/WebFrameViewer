@@ -183,16 +183,7 @@
                         hitTest = results[0];
                         hitTest.transformationMatrix.decompose(markerObject.scaling, markerObject.rotationQuaternion, markerObject.position);
 
-                        var fromV = markerObject.up;
-                                var toV = BABYLON.Vector3.Up();
                         
-                                var angle = Math.acos(BABYLON.Vector3.Dot(fromV, toV));
-                                var cross= BABYLON.Vector3.Cross(fromV, toV);
-                                var crossDot = BABYLON.Vector3.Dot(cross, markerObject.forward);
-                                if(crossDot < 0){
-                                    angle *= -1;
-                                }
-                                markerObject.addRotation(0,0,angle);
                                 
                                 //frame.addRotation(0, 0, angle);
                                 
@@ -314,7 +305,7 @@
                                 }
                         
                                 
-                                //frame.addRotation(0, 0, angle);
+                                frame.addRotation(0, 0, -angle);
                                 //frame.parent = marker;
                             }
                         }
