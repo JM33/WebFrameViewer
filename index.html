@@ -183,12 +183,18 @@
                         hitTest = results[0];
                         hitTest.transformationMatrix.decompose(markerObject.scaling, markerObject.rotationQuaternion, markerObject.position);
 
-                        let meshVector = markerObject.up;
-                                let dirVector = new BABYLON.Vector3(0,1,0);
-                            
-                                let focusPoint = dirVector.add(markerObject.position);   // absolute lookAt point
-                                let focusQuat = BABYLON.Quaternion.LookRotation(focusPoint.subtract(markerObject.position));   // rotation quaternion to local lookAt point
-                                focusQuat = new BABYLON.Quaternion(0, 0, focusQuat.z, focusQuat.w); // only use values of z-axis rotation
+                        var fromV = markerObject.up;
+                                var toV = BABYLON.Vector3.Up();
+                        
+                                var angle = Math.acos(BABYLON.Vector3.Dot(fromV, toV));
+                                var cross= BABYLON.Vector3.Cross(fromV, toV);
+                                var crossDot = BABYLON.Vector3.Dot(cross, MarkerObject.forward);
+                                if(crossDot < 0){
+                                    angle *= -1;
+                                }
+                                markerObject.addRotation(0,0,angle);
+                                
+                                //frame.addRotation(0, 0, angle);
                                 
                                 //markerObject.rotationQuaternion = focusQuat;
                         //frame.setParent(marker);
@@ -308,7 +314,7 @@
                                 }
                         
                                 
-                                frame.addRotation(0, 0, angle);
+                                //frame.addRotation(0, 0, angle);
                                 //frame.parent = marker;
                             }
                         }
