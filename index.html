@@ -273,16 +273,21 @@
                                 var matrix = markerObject.computeWorldMatrix(true);  // force calculation of world matrix
                                 var local_pos = new BABYLON.Vector3(0, 0, 0); //top middle of box relative to box
                                 var global_pos = BABYLON.Vector3.TransformCoordinates(local_pos, matrix); //calculate world position
-
-                                frame.position = global_pos; //position sphere relative to world
-                                
-                                var newRight = BABYLON.Vector3.Cross(BABYLON.Vector3.Up(), new BABYLON.Vector3(-matrix[8], -matrix[9], -matrix[10]));
-                                
-                                let sourceMatrix = BABYLON.Matrix.FromValues(matrix[0], matrix[1], matrix[2], 0, 
-                                                                             BABYLON.Vector3.Up().x, BABYLON.Vector3.Up().y, BABYLON.Vector3.Up().z, 0, 
-                                                                             newRight.x, newRight.y, newRight.z, 0,
-                                                                             0, 0, 1);
-
+                        
+                                //frame.position = global_pos; //position sphere relative to world
+                                                        
+                                var newRight = BABYLON.Vector3.Cross(BABYLON.Vector3.Up(), markerObject.forward);
+                                newRight.normalize();               
+                                let sourceMatrix = BABYLON.Matrix.FromValues(newRight.x, newRight.y, newRight.z, 0, 
+                                                                            BABYLON.Vector3.Up().x, BABYLON.Vector3.Up().y, BABYLON.Vector3.Up().z, 0, 
+                                                                            markerObject.forward.x, markerObject.forward.y, markerObject.forward.z, 0,
+                                                                            global_pos.x, global_pos.y, global_pos.z, 1);
+                                //let sourceMatrix = BABYLON.Matrix.FromValues(1, 0, 0, 0, 
+                                //                                             0, 1, 0, 0, 
+                                //                                             0, 0, 1, 0, 
+                                //                                             0, 2, 0, 1);
+                        
+                        
                                 let frameMatrix = frame.getWorldMatrix();
                                 frameMatrix.copyFrom( sourceMatrix );
                                 
