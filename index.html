@@ -278,20 +278,20 @@
                                                         
                                 var newRight = BABYLON.Vector3.Cross(BABYLON.Vector3.Up(), marker.forward);
                                 newRight.normalize();               
-                                let sourceMatrix = BABYLON.Matrix.FromValues(newRight.x, newRight.y, newRight.z, 0, 
-                                                                            BABYLON.Vector3.Up().x, BABYLON.Vector3.Up().y, BABYLON.Vector3.Up().z, 0, 
-                                                                            marker.forward.x, marker.forward.y, marker.forward.z, 0,
-                                                                            0, 0, 0, 1);
-                                //let sourceMatrix = BABYLON.Matrix.FromValues(1, 0, 0, 0, 
-                                //                                             0, 1, 0, 0, 
-                                //                                             0, 0, 1, 0, 
-                                //                                             0, 2, 0, 1);
+                                //let sourceMatrix = BABYLON.Matrix.FromValues(newRight.x, newRight.y, newRight.z, 0, 
+                                //                                            BABYLON.Vector3.Up().x, BABYLON.Vector3.Up().y, BABYLON.Vector3.Up().z, 0, 
+                                //                                            marker.forward.x, marker.forward.y, marker.forward.z, 0,
+                                //                                            0, 0, 0, 1);
+                                let sourceMatrix = BABYLON.Matrix.FromValues(1, 0, 0, 0, 
+                                                                             0, 1, 0, 0, 
+                                                                             0, 0, 1, 0, 
+                                                                             10, 2, 0, 1);
                         
                         
                                 let frameMatrix = frame.getWorldMatrix();
                                 frameMatrix.copyFrom( sourceMatrix );
                                 
-                                frame.position = global_pos; //position sphere relative to world
+                                //frame.position = global_pos; //position sphere relative to world
 
                                 //frame.parent = marker;
                             }
