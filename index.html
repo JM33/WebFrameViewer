@@ -270,30 +270,44 @@
                                 frame.isVisible = true;
                                 
                                 
-                                var matrix = marker.computeWorldMatrix(true);  // force calculation of world matrix
-                                var local_pos = new BABYLON.Vector3(0, 0, 0); //top middle of box relative to box
-                                var global_pos = BABYLON.Vector3.TransformCoordinates(local_pos, matrix); //calculate world position
+                                //var matrix = marker.computeWorldMatrix(true);  // force calculation of world matrix
+                                //var local_pos = new BABYLON.Vector3(0, 0, 0); //top middle of box relative to box
+                                //var global_pos = BABYLON.Vector3.TransformCoordinates(local_pos, matrix); //calculate world position
                         
                                 
                                                         
-                                var newRight = BABYLON.Vector3.Cross(BABYLON.Vector3.Up(), marker.forward);
+                                //var newRight = BABYLON.Vector3.Cross(BABYLON.Vector3.Up(), marker.forward);
                                 newRight.normalize();               
                                 //let sourceMatrix = BABYLON.Matrix.FromValues(newRight.x, newRight.y, newRight.z, 0, 
                                 //                                            BABYLON.Vector3.Up().x, BABYLON.Vector3.Up().y, BABYLON.Vector3.Up().z, 0, 
                                 //                                            marker.forward.x, marker.forward.y, marker.forward.z, 0,
                                 //                                            0, 0, 0, 1);
-                                let sourceMatrix = BABYLON.Matrix.FromValues(1, 0, 0, 0, 
-                                                                             0, 1, 0, 0, 
-                                                                             0, 0, 1, 0, 
-                                                                             10, 2, 0, 1);
+                                //let sourceMatrix = BABYLON.Matrix.FromValues(1, 0, 0, 0, 
+                                //                                             0, 1, 0, 0, 
+                                 //                                            0, 0, 1, 0, 
+                                //                                             10, 2, 0, 1);
                         
                         
-                                let frameMatrix = frame.getWorldMatrix();
+                                //let frameMatrix = frame.getWorldMatrix();
                                 //frameMatrix.copyFrom( sourceMatrix );
-                                
-                                frame.position = global_pos; //position sphere relative to world
-                                frame.addRotation(0,0, Math.PI/2);
 
+                                
+                                
+                                //frame.position = global_pos; //position sphere relative to world
+
+                                var fromV = marker.up;
+                                var toV = BABYLON.Vector3.Up();
+                        
+                                var angle = Math.acos(BABYLON.Vector3.Dot(fromV, toV));
+                                var cross= BABYLON.Vector3.Cross(fromV, toV);
+                                var crossDot = BABYLON.Vector3.Dot(cross, marker.forward);
+                                if(crossDot < 0){
+                                    angle *= -1;
+                                }
+                                //box1.addRotation(0, 0, angle);
+                        
+                                frame.parent = marker;
+                                frame.addRotation(0, 0, angle);
                                 //frame.parent = marker;
                             }
                         }
