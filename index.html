@@ -289,9 +289,10 @@
                         
                         
                                 let frameMatrix = frame.getWorldMatrix();
-                                frameMatrix.copyFrom( sourceMatrix );
+                                //frameMatrix.copyFrom( sourceMatrix );
                                 
-                                //frame.position = global_pos; //position sphere relative to world
+                                frame.position = global_pos; //position sphere relative to world
+                                frame.addRotation(0,0, Math.PI/2);
 
                                 //frame.parent = marker;
                             }
