@@ -188,7 +188,7 @@
                         
                                 var angle = Math.acos(BABYLON.Vector3.Dot(fromV, toV));
                                 var cross= BABYLON.Vector3.Cross(fromV, toV);
-                                var crossDot = BABYLON.Vector3.Dot(cross, MarkerObject.forward);
+                                var crossDot = BABYLON.Vector3.Dot(cross, markerObject.forward);
                                 if(crossDot < 0){
                                     angle *= -1;
                                 }
