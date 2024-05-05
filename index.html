@@ -295,18 +295,18 @@
                                 
                                 //frame.position = global_pos; //position sphere relative to world
 
-                                var fromV = marker.up;
+                                var fromV = markerObject.up;
                                 var toV = BABYLON.Vector3.Up();
                         
                                 var angle = Math.acos(BABYLON.Vector3.Dot(fromV, toV));
                                 var cross= BABYLON.Vector3.Cross(fromV, toV);
-                                var crossDot = BABYLON.Vector3.Dot(cross, marker.forward);
+                                var crossDot = BABYLON.Vector3.Dot(cross, markerObject.forward);
                                 if(crossDot < 0){
                                     angle *= -1;
                                 }
                                 //box1.addRotation(0, 0, angle);
                         
-                                frame.parent = marker;
+                                frame.parent = markerObject;
                                 frame.addRotation(0, 0, angle);
                                 //frame.parent = marker;
                             }
