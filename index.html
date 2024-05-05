@@ -280,7 +280,7 @@
                                 newRight.normalize();               
                                 let sourceMatrix = BABYLON.Matrix.FromValues(newRight.x, newRight.y, newRight.z, 0, 
                                                                             BABYLON.Vector3.Up().x, BABYLON.Vector3.Up().y, BABYLON.Vector3.Up().z, 0, 
-                                                                            markerObject.forward.x, markerObject.forward.y, markerObject.forward.z, 0,
+                                                                            matrix[8], matrix[9], matrix[10], 0,
                                                                             global_pos.x, global_pos.y, global_pos.z, 1);
                                 //let sourceMatrix = BABYLON.Matrix.FromValues(1, 0, 0, 0, 
                                 //                                             0, 1, 0, 0, 
