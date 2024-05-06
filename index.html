@@ -91,7 +91,9 @@
             const fm = xr.baseExperience.featuresManager;
         
             const xrTest = fm.enableFeature(BABYLON.WebXRHitTest, "latest");
-        
+
+            var debug = true;
+            
             const marker = BABYLON.MeshBuilder.CreateTorus('marker', { diameter: 0.15, thickness: 0.05 });
             marker.isVisible = false;
             marker.rotationQuaternion = new BABYLON.Quaternion();
@@ -133,6 +135,10 @@
             boxFwd.material = blueMat;
             boxFwd.parent = marker;
 
+            boxUp.isVisible = debug;
+            boxRight.isVisible = debug;
+            boxFwd.isVisible = debug;
+
             var frame = new BABYLON.Mesh("frame");
             BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/JM33/WebFrameViewer/main/", "waara_frame.glb", scene, function(newMeshes){
                 newMeshes[0].scaling = new BABYLON.Vector3(0.0254, 0.0254, 0.0254);
@@ -142,6 +148,7 @@
                 //frame.setParent(marker);
             });
             frame.rotationQuaternion = new BABYLON.Quaternion();
+            frame.isVisible = false;
         
             xrTest.onHitTestResultObservable.add((results) => {
                 if (results.length) {
@@ -157,11 +164,11 @@
         
             var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
         
-            var button = BABYLON.GUI.Button.CreateImageButton("but", "Click Me");
+            var button = BABYLON.GUI.Button.CreateImageButton("but", "Place Frame");
             button.width = 0.2;
             button.height = "100px";
             button.color = "white";
-            button.background = "green";
+            button.background = "blue";
             advancedTexture.addControl(button);
             button.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
         
@@ -206,6 +213,12 @@
                 if(crossDot < 0){
                     angle *= -1;
                 }
+                var camToPos = global_pos.subtract(camera.position).length();
+                var camToFwd = gloabal_pos.add(marker.up).subtract(camera.position).length();
+                if(camToFwd > camToPos){
+                    angle += BABYLON.Tools.ToRadians(180);
+                }
+                
                 frame.addRotation(0,angle,0);
                 //frame.rotationQuaternion = BABYLON.Quaternion.RotationAxis(frame.up, BABYLON.Tools.ToRadians(angle));
                 
