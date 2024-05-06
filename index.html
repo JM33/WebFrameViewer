@@ -196,24 +196,40 @@
                 let frameMatrix = frame.getWorldMatrix();
                 //frameMatrix.copyFrom( sourceMatrix );
                 
-                
-                //box.parent = marker;
-                //box.addRotation(Math.PI/2,0,0);
-                var fromV = box.right;
+                frame.rotationQuaternion = marker.rotationQuaternion;
+
+                var fromV = frame.forward;
                 var toV = BABYLON.Vector3.Up();
         
                 var angle = Math.acos(BABYLON.Vector3.Dot(fromV, toV));
                 var cross= BABYLON.Vector3.Cross(fromV, toV);
-                var crossDot = BABYLON.Vector3.Dot(cross, box.up);
+                var crossDot = BABYLON.Vector3.Dot(cross, frame.up);
                 if(crossDot < 0){
                     angle *= -1;
                 }
+                //box.addRotation(0,angle,0);
+                frame.rotaionQuaternion = marker.rotationQuaternion.add(BABYLON.Quaternion.RotationAxis(frame.up, BABYLON.Tools.ToRadians(angle)));
+                
+                //var fromV = frame.right;
+                //var toV = BABYLON.Vector3.Up();
+        
+                //var angle = Math.acos(BABYLON.Vector3.Dot(fromV, toV));
+                //var cross= BABYLON.Vector3.Cross(fromV, toV);
+                //var crossDot = BABYLON.Vector3.Dot(cross, box.up);
+                //if(crossDot < 0){
+                  //  angle *= -1;
+                //}
                 //box.addRotation(0,angle,0);
 
                 box.position = global_pos; //position sphere relative to world
                 //box.parent = null;
                 //frame.position = global_pos;
+                
                 frame.rotationQuaternion = marker.rotationQuaternion;
+
+
+
+                
                 frame.position = global_pos;
             });
         
