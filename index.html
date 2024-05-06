@@ -196,7 +196,7 @@
                 let frameMatrix = frame.getWorldMatrix();
                 //frameMatrix.copyFrom( sourceMatrix );
                 
-                frame.rotationQuaternion = new BABYLON.Quaternion();
+                //frame.rotationQuaternion = new BABYLON.Quaternion();
                 var fromV = frame.forward;
                 var toV = marker.up;
         
@@ -206,8 +206,8 @@
                 if(crossDot < 0){
                     angle *= -1;
                 }
-                //frame.addRotation(0,angle,0);
-                frame.rotationQuaternion = BABYLON.Quaternion.RotationAxis(frame.up, BABYLON.Tools.ToRadians(angle));
+                frame.addRotation(0,angle,0);
+                //frame.rotationQuaternion = BABYLON.Quaternion.RotationAxis(frame.up, BABYLON.Tools.ToRadians(angle));
                 
                 //var fromV = frame.right;
                 //var toV = BABYLON.Vector3.Up();
