@@ -171,7 +171,7 @@
                 let sourceMatrix = BABYLON.Matrix.FromValues(newRight.x, newRight.y, newRight.z, 0, 
                                                             BABYLON.Vector3.Up().x, BABYLON.Vector3.Up().y, BABYLON.Vector3.Up().z, 0, 
                                                             marker.forward.x, marker.forward.y, marker.forward.z, 0,
-                                                            global_pos.x, global_pos.y, global_pos.z, 1);
+                                                            0, 0, 0, 1);
                 //let sourceMatrix = BABYLON.Matrix.FromValues(1, 0, 0, 0, 
                 //                                             0, 1, 0, 0, 
                 //                                             0, 0, 1, 0, 
@@ -180,6 +180,7 @@
         
                 //let boxMatrix = box.getWorldMatrix();
                 boxMatrix.copyFrom( sourceMatrix );
+                box.position = global_pos; //position sphere relative to world
                 
                 //box.parent = marker;
                 //box.addRotation(Math.PI/2,0,0);
