@@ -187,12 +187,12 @@
                 
                 //box.parent = marker;
                 //box.addRotation(Math.PI/2,0,0);
-                var fromV = box.up;
+                var fromV = box.forward;
                 var toV = BABYLON.Vector3.Up();
         
                 var angle = Math.acos(BABYLON.Vector3.Dot(fromV, toV));
                 var cross= BABYLON.Vector3.Cross(fromV, toV);
-                var crossDot = BABYLON.Vector3.Dot(cross, box.forward);
+                var crossDot = BABYLON.Vector3.Dot(cross, box.up);
                 if(crossDot < 0){
                     angle *= -1;
                 }
