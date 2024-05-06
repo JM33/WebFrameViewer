@@ -179,8 +179,10 @@
         
         
                 let boxMatrix = box.getWorldMatrix();
-                boxMatrix.copyFrom( sourceMatrix );
+                //boxMatrix.copyFrom( sourceMatrix );
+                box.rotationQuaternion = marker.rotationQuaternion;
                 box.position = global_pos; //position sphere relative to world
+                
                 
                 //box.parent = marker;
                 //box.addRotation(Math.PI/2,0,0);
