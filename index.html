@@ -125,19 +125,41 @@
             button.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
         
             button.onPointerClickObservable.add(() => {
-                box.parent = marker;
-                box.addRotation(Math.PI/2,0,0);
-                var fromV = box.up;
-                var toV = BABYLON.Vector3.Up();
+                //box.parent = marker;
+                var matrix = marker.computeWorldMatrix(true);  // force calculation of world matrix
+                var local_pos = new BABYLON.Vector3(0, 0, 0); //top middle of box relative to box
+                var global_pos = BABYLON.Vector3.TransformCoordinates(local_pos, matrix); //calculate world position
         
-                var angle = Math.acos(BABYLON.Vector3.Dot(fromV, toV));
-                var cross= BABYLON.Vector3.Cross(fromV, toV);
-                var crossDot = BABYLON.Vector3.Dot(cross, box.forward);
-                if(crossDot < 0){
-                    angle *= -1;
-                }
-                box.addRotation(0, 0, angle);
-                box.parent = null;
+                //box2.position = global_pos; //position sphere relative to world
+                                        
+                var newRight = BABYLON.Vector3.Cross(BABYLON.Vector3.Up(), marker.forward);
+                newRight.normalize();               
+                let sourceMatrix = BABYLON.Matrix.FromValues(newRight.x, newRight.y, newRight.z, 0, 
+                                                            BABYLON.Vector3.Up().x, BABYLON.Vector3.Up().y, BABYLON.Vector3.Up().z, 0, 
+                                                            marker.forward.x, marker.forward.y, marker.forward.z, 0,
+                                                            global_pos.x, global_pos.y, global_pos.z, 1);
+                //let sourceMatrix = BABYLON.Matrix.FromValues(1, 0, 0, 0, 
+                //                                             0, 1, 0, 0, 
+                //                                             0, 0, 1, 0, 
+                //                                             0, 2, 0, 1);
+        
+        
+                let boxMatrix = box.getWorldMatrix();
+                boxMatrix.copyFrom( sourceMatrix );
+                
+                //box.parent = marker;
+                //box.addRotation(Math.PI/2,0,0);
+                //var fromV = box.up;
+                //var toV = BABYLON.Vector3.Up();
+        
+                //var angle = Math.acos(BABYLON.Vector3.Dot(fromV, toV));
+                //var cross= BABYLON.Vector3.Cross(fromV, toV);
+                //var crossDot = BABYLON.Vector3.Dot(cross, box.forward);
+                //if(crossDot < 0){
+                //    angle *= -1;
+                //}
+                //box.addRotation(0, 0, angle);
+                //box.parent = null;
             });
         
             return scene;
