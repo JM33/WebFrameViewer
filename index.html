@@ -282,6 +282,8 @@
                         
                                 let frameMatrix = frame.getWorldMatrix();
                                 frameMatrix.copyFrom( sourceMatrix );
+
+                                frame.position = global_pos;
                             }
                         }
         				break;
