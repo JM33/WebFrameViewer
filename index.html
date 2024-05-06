@@ -211,7 +211,7 @@
                 box.position = global_pos; //position sphere relative to world
                 //box.parent = null;
                 //frame.position = global_pos;
-                frame.parent = box;
+                frame.rotationQuaternion = marker.rotationQuaternion;
             });
         
             return scene;
