@@ -121,6 +121,7 @@
             var box = BABYLON.MeshBuilder.CreateBox("box1", {width: 0.25, depth: 0.1, height: 0.45}, scene);
             box.material = purpleMat;
             box.rotationQuaternion = new BABYLON.Quaternion();
+            box.isVisible = false;
 
             var boxUp = BABYLON.MeshBuilder.CreateBox("up", {width: 0.01, depth: 0.01, height: 0.3}, scene);
             boxUp.position.y = 0.15;
