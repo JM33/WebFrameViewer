@@ -192,7 +192,7 @@
                 //box.rotationQuaternion = marker.rotationQuaternion
                 //box.rotationQuaternion = box.rotationQuaternion.add(BABYLON.Quaternion.FromEulerAngles(90,0,0));
                 let frameMatrix = frame.getWorldMatrix();
-                frameMatrix.copyFrom( sourceMatrix );
+                //frameMatrix.copyFrom( sourceMatrix );
                 
                 
                 //box.parent = marker;
@@ -210,7 +210,8 @@
 
                 box.position = global_pos; //position sphere relative to world
                 //box.parent = null;
-                frame.positiin = global_pos;
+                //frame.position = global_pos;
+                frame.parent = box;
             });
         
             return scene;
