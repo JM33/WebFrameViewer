@@ -211,7 +211,7 @@
                 box.position = global_pos; //position sphere relative to world
                 //box.parent = null;
                 //frame.position = global_pos;
-                frame.rotationQuaternion = marker.rotationQuaternion;
+                frame.rotationQuaternion = marker.rotationQuaternion.add(BABYLON.Quaternion.FromEulerAngles(Math.PI/2 0,0));
                 frame.position = global_pos;
             });
         
