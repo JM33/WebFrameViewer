@@ -79,7 +79,7 @@
             var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
         
             // Default intensity is 1. Let's dim the light a small amount
-            light.intensity = 0.7;
+            light.intensity = 0.9;
         
             var xr = await scene.createDefaultXRExperienceAsync({
                 uiOptions: {
@@ -213,8 +213,8 @@
                 if(crossDot < 0){
                     angle *= -1;
                 }
-                var camToPos = global_pos.subtract(camera.position).length();
-                var camToFwd = gloabal_pos.add(marker.up).subtract(camera.position).length();
+                var camToPos = global_pos.subtract(camera.getFrontPosition(0)).length();
+                var camToFwd = gloabal_pos.add(marker.up).subtract(camera.getFrontPosition(0)).length();
                 if(camToFwd > camToPos){
                     angle += BABYLON.Tools.ToRadians(180);
                 }
