@@ -166,7 +166,7 @@
         
                 //box2.position = global_pos; //position sphere relative to world
                                         
-                var newRight = BABYLON.Vector3.Cross(BABYLON.Vector3.Up(), marker.up);
+                var newRight = BABYLON.Vector3.Cross(marker.up, BABYLON.Vector3.Up());
                 newRight.normalize();               
                 let sourceMatrix = BABYLON.Matrix.FromValues(newRight.x, newRight.y, newRight.z, 0, 
                                                             BABYLON.Vector3.Up().x, BABYLON.Vector3.Up().y, BABYLON.Vector3.Up().z, 0, 
