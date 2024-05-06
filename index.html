@@ -118,6 +118,7 @@
         
             var box = BABYLON.MeshBuilder.CreateBox("box1", {width: 0.25, depth: 0.1, height: 0.45}, scene);
             box.material = purpleMat;
+            box.rotationQuaternion = new BABYLON.Quaternion();
 
             var boxUp = BABYLON.MeshBuilder.CreateBox("up", {width: 0.01, depth: 0.01, height: 0.3}, scene);
             boxUp.position.y = 0.15;
@@ -140,6 +141,7 @@
                 frame.isVisible = false;
                 //frame.setParent(marker);
             });
+            frame.rotationQuaternion = new BABYLON.Quaternion();
         
             xrTest.onHitTestResultObservable.add((results) => {
                 if (results.length) {
@@ -211,7 +213,7 @@
                 box.position = global_pos; //position sphere relative to world
                 //box.parent = null;
                 //frame.position = global_pos;
-                frame.rotationQuaternion = BABYLON.Quaternion.FromEulerAngles(Math.PI/2, 0,0).add(marker.rotationQuaternion);
+                frame.rotationQuaternion = marker.rotationQuaternion.add(BABYLON.Quaternion.FromEulerAngles(Math.PI/2, 0,0));
                 frame.position = global_pos;
             });
         
