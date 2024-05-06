@@ -208,7 +208,7 @@
                     angle *= -1;
                 }
                 //box.addRotation(0,angle,0);
-                frame.rotaionQuaternion = marker.rotationQuaternion.add(BABYLON.Quaternion.RotationAxis(frame.up, BABYLON.Tools.ToRadians(angle)));
+                frame.rotaionQuaternion = BABYLON.Quaternion.RotationAxis(frame.up, BABYLON.Tools.ToRadians(angle)));
                 
                 //var fromV = frame.right;
                 //var toV = BABYLON.Vector3.Up();
