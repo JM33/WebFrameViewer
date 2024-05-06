@@ -214,7 +214,8 @@
                     angle *= -1;
                 }
                 var camToPos = global_pos.subtract(camera.getFrontPosition(0)).length();
-                var camToFwd = gloabal_pos.add(marker.up).subtract(camera.getFrontPosition(0)).length();
+                var camToFwd = gloabal_pos.add(marker.up);
+                camToFwd = camToFwd.subtract(camera.getFrontPosition(0)).length();
                 if(camToFwd > camToPos){
                     angle += BABYLON.Tools.ToRadians(180);
                 }
