@@ -190,25 +190,24 @@
         
         
                 let boxMatrix = box.getWorldMatrix();
-                boxMatrix.copyFrom( sourceMatrix );
+                //boxMatrix.copyFrom( sourceMatrix );
                 //box.rotationQuaternion = marker.rotationQuaternion
                 //box.rotationQuaternion = box.rotationQuaternion.add(BABYLON.Quaternion.FromEulerAngles(90,0,0));
                 let frameMatrix = frame.getWorldMatrix();
                 //frameMatrix.copyFrom( sourceMatrix );
                 
-                frame.rotationQuaternion = marker.rotationQuaternion;
-
+                
                 var fromV = frame.forward;
-                var toV = BABYLON.Vector3.Up();
+                var toV = marker.up;
         
                 var angle = Math.acos(BABYLON.Vector3.Dot(fromV, toV));
                 var cross= BABYLON.Vector3.Cross(fromV, toV);
-                var crossDot = BABYLON.Vector3.Dot(cross, frame.up);
+                var crossDot = BABYLON.Vector3.Dot(cross, BABYLON.Vector3.Up());
                 if(crossDot < 0){
                     angle *= -1;
                 }
                 //box.addRotation(0,angle,0);
-                frame.rotaionQuaternion = BABYLON.Quaternion.RotationAxis(frame.up, BABYLON.Tools.ToRadians(angle));
+                frame.rotationQuaternion = BABYLON.Quaternion.RotationAxis(frame.up, BABYLON.Tools.ToRadians(angle));
                 
                 //var fromV = frame.right;
                 //var toV = BABYLON.Vector3.Up();
