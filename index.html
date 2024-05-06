@@ -95,7 +95,22 @@
             const marker = BABYLON.MeshBuilder.CreateTorus('marker', { diameter: 0.15, thickness: 0.05 });
             marker.isVisible = false;
             marker.rotationQuaternion = new BABYLON.Quaternion();
+
+            var redMat = new BABYLON.StandardMaterial("ground", scene);
+            redMat.diffuseColor = new BABYLON.Color3(0.4, 0.4, 0.4);
+            redMat.specularColor = new BABYLON.Color3(0.4, 0.4, 0.4);
+            redMat.emissiveColor = BABYLON.Color3.Red();
         
+            var greenMat = new BABYLON.StandardMaterial("ground", scene);
+            greenMat.diffuseColor = new BABYLON.Color3(0.4, 0.4, 0.4);
+            greenMat.specularColor = new BABYLON.Color3(0.4, 0.4, 0.4);
+            greenMat.emissiveColor = BABYLON.Color3.Green();
+        
+            var blueMat = new BABYLON.StandardMaterial("ground", scene);
+            blueMat.diffuseColor = new BABYLON.Color3(0.4, 0.4, 0.4);
+            blueMat.specularColor = new BABYLON.Color3(0.4, 0.4, 0.4);
+            blueMat.emissiveColor = BABYLON.Color3.Blue();
+            
             var purpleMat = new BABYLON.StandardMaterial("ground", scene);
             purpleMat.diffuseColor = new BABYLON.Color3(0.4, 0.4, 0.4);
             purpleMat.specularColor = new BABYLON.Color3(0.4, 0.4, 0.4);
@@ -103,6 +118,19 @@
         
             var box = BABYLON.MeshBuilder.CreateBox("box1", {width: 0.25, depth: 0.1, height: 0.45}, scene);
             box.material = purpleMat;
+
+            var boxUp = BABYLON.MeshBuilder.CreateBox("up", {width: 0.05, depth: 0.05, height: 1.5}, scene);
+            boxUp.position.y = 0.75;
+            boxUp.material = greenMat;
+            boxUp.parent = marker;
+            var boxRight = BABYLON.MeshBuilder.CreateBox("right", {width: 1.5, depth: 0.05, height: 0.05}, scene);
+            boxRight.position.x = 0.75;
+            boxRight.material = redMat;
+            boxRight.parent = marker;
+            var boxFwd = BABYLON.MeshBuilder.CreateBox("back", {width: 0.05, depth: 1.5, height: 0.05}, scene);
+            boxFwd.position.z = 0.75;
+            boxFwd.material = blueMat;
+            boxFwd.parent = marker;
         
             xrTest.onHitTestResultObservable.add((results) => {
                 if (results.length) {
@@ -113,6 +141,8 @@
                     marker.isVisible = false;
                 }
             });
+
+            
         
             var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
         
