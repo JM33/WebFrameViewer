@@ -91,241 +91,42 @@
             const fm = xr.baseExperience.featuresManager;
         
             const xrTest = fm.enableFeature(BABYLON.WebXRHitTest, "latest");
-
-            var cyanMat = new BABYLON.StandardMaterial("ground", scene);
-            cyanMat.diffuseColor = new BABYLON.Color3(0.03, 0.92, 0.95);
-            cyanMat.specularColor = new BABYLON.Color3(0.03, 0.92, 0.95);
-            cyanMat.emissiveColor = new BABYLON.Color3.Teal();
-
-            var redMat = new BABYLON.StandardMaterial("ground", scene);
-            redMat.diffuseColor = new BABYLON.Color3(0.4, 0.4, 0.4);
-            redMat.specularColor = new BABYLON.Color3(0.4, 0.4, 0.4);
-            redMat.emissiveColor = new BABYLON.Color3.Red();
-
-            
-            var discRadius = 0.0375;
-            var armsRadius = 0.1;
-            const marker = BABYLON.MeshBuilder.CreateDisc("disc", {radius: discRadius, tessellation: 64}, scene);
-            marker.material = cyanMat;
+        
+            const marker = BABYLON.MeshBuilder.CreateTorus('marker', { diameter: 0.15, thickness: 0.05 });
+            marker.isVisible = false;
             marker.rotationQuaternion = new BABYLON.Quaternion();
         
-            const markerNorth = BABYLON.MeshBuilder.CreateDisc("discN", {radius: armsRadius, tessellation: 64, arc: 0.05}, scene);
-            markerNorth.material = redMat;
-            markerNorth.addRotation(0, 0, BABYLON.Tools.ToRadians(270));  
-            markerNorth.parent = marker;
+            var purpleMat = new BABYLON.StandardMaterial("ground", scene);
+            purpleMat.diffuseColor = new BABYLON.Color3(0.4, 0.4, 0.4);
+            purpleMat.specularColor = new BABYLON.Color3(0.4, 0.4, 0.4);
+            purpleMat.emissiveColor = BABYLON.Color3.Purple();
         
-            const markerSouth = BABYLON.MeshBuilder.CreateDisc("discN", {radius: armsRadius, tessellation: 64, arc: 0.05}, scene);
-            markerSouth.material = cyanMat;
-            markerSouth.addRotation(0, 0, BABYLON.Tools.ToRadians(90));
-            markerSouth.parent = marker;
+            var box = BABYLON.MeshBuilder.CreateBox("box1", {width: 0.25, depth: 0.1, height: 0.45}, scene);
+            box.material = purpleMat;
         
-            const markerEast = BABYLON.MeshBuilder.CreateDisc("discN", {radius: armsRadius, tessellation: 64, arc: 0.05}, scene);
-            markerEast.material = cyanMat; 
-            markerEast.addRotation(0, 0, 0);  
-            markerEast.parent = marker;
-        
-            const markerWest = BABYLON.MeshBuilder.CreateDisc("discN", {radius: armsRadius, tessellation: 64, arc: 0.05}, scene);
-            markerWest.material = cyanMat;
-            markerWest.addRotation(0, 0, BABYLON.Tools.ToRadians(180));
-            markerWest.parent = marker;
-        
-            marker.rotationQuaternion = new BABYLON.Quaternion();
-            marker.addRotation(BABYLON.Tools.ToRadians(90), BABYLON.Tools.ToRadians(180), BABYLON.Tools.ToRadians(-10));
-
-            const markerObject = new BABYLON.Mesh("markerObject");
-            markerObject.rotationQuaternion = new BABYLON.Quaternion();
-            marker.parent = markerObject;
-            
-            //const marker = BABYLON.MeshBuilder.CreateTorus('marker', { diameter: 0.15, thickness: 0.05 });
-            //marker.scaling = new BABYLON.Vector3(1, 0.1, 1);
-            //marker.material = cyanMat;
-            //marker.isVisible = false;
-            //marker.rotationQuaternion = new BABYLON.Quaternion();
-
-            var frame = new BABYLON.Mesh("frame");
-            BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/JM33/WebFrameViewer/main/", "waara_frame.glb", scene, function(newMeshes){
-                newMeshes[0].scaling = new BABYLON.Vector3(0.0254, 0.0254, 0.0254);
-                //newMeshes[0].rotation.x = Math.PI/2;
-                frame = newMeshes[0];
-                frame.isVisible = false;
-                //frame.setParent(marker);
-            });
-            //frame.addRotation(Math.PI/2,0,0);
-            //frame.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
-            //await BABYLON.SceneLoader.AppendAsync("", "https://github.com/JM33/WebFrameViewer/blob/main/waara_frame.glb", scene);
-            
-            
-            // The first parameter can be used to specify which mesh to import. Here we import all meshes
-            //const resultPromise = BABYLON.SceneLoader.ImportMeshAsync("", "https://raw.githubusercontent.com/JM33/WebFrameViewer/main/", "waara_frame.glb", scene);
-            
-            // Result has meshes, particleSystems, skeletons, animationGroups and transformNodes
-            //resultPromise.then((result) => {
-            //    camera.target = result.meshes[0];
-            //})
-
-            
-
-
-
-            /************************************AR Hit Test****************************************/
-
-            var isFramePlaced = false;
-            
             xrTest.onHitTestResultObservable.add((results) => {
                 if (results.length) {
-                    if(!isFramePlaced){
-                        marker.isVisible = true;
-                        markerNorth.isVisible = true;
-                        markerEast.isVisible = true;
-                        markerSouth.isVisible = true;
-                        markerWest.isVisible = true;
-                        //frame.isVisible = true;
-                        hitTest = results[0];
-                        hitTest.transformationMatrix.decompose(markerObject.scaling, markerObject.rotationQuaternion, markerObject.position);
-
-                        
-                                
-                                //frame.addRotation(0, 0, angle);
-                                
-                                //markerObject.rotationQuaternion = focusQuat;
-                        //frame.setParent(marker);
-                    }
+                    marker.isVisible = true;
+                    hitTest = results[0];
+                    hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
                 } else {
                     marker.isVisible = false;
-                    markerNorth.isVisible = false;
-                    markerEast.isVisible = false;
-                    markerSouth.isVisible = false;
-                    markerWest.isVisible = false;
-                    frame.isVisible = false;
                 }
             });
-
-
-
-
-            /************************************Touch Controls****************************************/
-
-            
-            
-            var startingPoint;
-            var currentMesh;
         
-            var getGroundPosition = function () {
-                var pickinfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return mesh == ground; });
-                if (pickinfo.hit) {
-                    return pickinfo.pickedPoint;
-                }
+            var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
         
-                return null;
-            }
+            var button = BABYLON.GUI.Button.CreateImageButton("but", "Click Me");
+            button.width = 0.2;
+            button.height = "40px";
+            button.color = "white";
+            button.background = "green";
+            advancedTexture.addControl(button);
+            button.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
         
-            var pointerDown = function (mesh) {
-                    currentMesh = mesh;
-                    startingPoint = getGroundPosition();
-                    if (startingPoint) { // we need to disconnect camera from canvas
-                        setTimeout(function () {
-                            camera.detachControl(canvas);
-                        }, 0);
-                    }
-            }
-        
-            var pointerUp = function () {
-                if (startingPoint) {
-                    camera.attachControl(canvas, true);
-                    startingPoint = null;
-                    return;
-                }
-            }
-        
-            var pointerMove = function () {
-                if (!startingPoint) {
-                    return;
-                }
-                var current = getGroundPosition();
-                if (!current) {
-                    return;
-                }
-        
-                var diff = current.subtract(startingPoint);
-                currentMesh.position.addInPlace(diff);
-        
-                startingPoint = current;
-        
-            }
-            
-            scene.onPointerObservable.add((pointerInfo) => {      		
-                switch (pointerInfo.type) {
-        			case BABYLON.PointerEventTypes.POINTERDOWN:
-                        if(isFramePlaced){
-                            if(pointerInfo.pickInfo.hit) {
-                                pointerDown(pointerInfo.pickInfo.pickedMesh)
-                            }
-                        }else{
-            				if(marker.isVisible){
-                                isFramePlaced = true;
-                                marker.isVisible = false;
-                                frame.isVisible = true;
-                                
-                                
-                                //var matrix = marker.computeWorldMatrix(true);  // force calculation of world matrix
-                                //var local_pos = new BABYLON.Vector3(0, 0, 0); //top middle of box relative to box
-                                //var global_pos = BABYLON.Vector3.TransformCoordinates(local_pos, matrix); //calculate world position
-                        
-                                
-                                                        
-                                //var newRight = BABYLON.Vector3.Cross(BABYLON.Vector3.Up(), marker.forward);
-                                //newRight.normalize();               
-                                //let sourceMatrix = BABYLON.Matrix.FromValues(newRight.x, newRight.y, newRight.z, 0, 
-                                //                                            BABYLON.Vector3.Up().x, BABYLON.Vector3.Up().y, BABYLON.Vector3.Up().z, 0, 
-                                //                                            marker.forward.x, marker.forward.y, marker.forward.z, 0,
-                                //                                            0, 0, 0, 1);
-                                //let sourceMatrix = BABYLON.Matrix.FromValues(1, 0, 0, 0, 
-                                //                                             0, 1, 0, 0, 
-                                 //                                            0, 0, 1, 0, 
-                                //                                             10, 2, 0, 1);
-                        
-                        
-                                //let frameMatrix = frame.getWorldMatrix();
-                                //frameMatrix.copyFrom( sourceMatrix );
-
-                                
-                                
-                                //frame.position = global_pos; //position sphere relative to world
-
-                                frame.parent = marker;
-                                
-                                var fromV = frame.up;
-                                var toV = BABYLON.Vector3.Up();
-                        
-                                var angle = Math.acos(BABYLON.Vector3.Dot(fromV, toV));
-                                var cross= BABYLON.Vector3.Cross(fromV, toV);
-                                var crossDot = BABYLON.Vector3.Dot(cross, frame.forward);
-                                if(crossDot < 0){
-                                    angle *= -1;
-                                }
-                        
-                                
-                                frame.addRotation(0, 0, -angle);
-                                //frame.parent = marker;
-                            }
-                        }
-        				break;
-        			case BABYLON.PointerEventTypes.POINTERUP:
-                            pointerUp();
-        				break;
-        			case BABYLON.PointerEventTypes.POINTERMOVE:          
-                            pointerMove();
-        				break;
-                }
+            button.onPointerClickObservable.add(() => {
+                box.parent = marker;
             });
-
-            BABYLON.Quaternion.LookRotation = function(pos, fwd=BABYLON.Vector3.Forward()) 
-            {
-                let result = BABYLON.Matrix.Zero();
-                BABYLON.Matrix.LookAtLHToRef(BABYLON.Vector3.Zero(), pos, fwd, result);
-                result.invert();
-                return BABYLON.Quaternion.FromRotationMatrix(result);
-            };
         
             return scene;
         
