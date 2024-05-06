@@ -180,8 +180,7 @@
         
                 let boxMatrix = box.getWorldMatrix();
                 //boxMatrix.copyFrom( sourceMatrix );
-                box.rotationQuaternion = marker.rotationQuaternion;
-                box.addRotation(Math.PI/2,0,0);
+                box.rotationQuaternion = marker.rotationQuaternion.add(BABYLON.Quaternion.FromEulerAngles(90,0,0));
                 
                 
                 
@@ -197,7 +196,7 @@
                 if(crossDot < 0){
                     angle *= -1;
                 }
-                box.addRotation(0, 0, angle);
+                box.rotationQuaternion = box.rotationQuaternion.add(BABYLON.Quaternion.FromEulerAngles(0,0,angle));
 
                 box.position = global_pos; //position sphere relative to world
                 //box.parent = null;
