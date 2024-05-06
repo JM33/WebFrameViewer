@@ -120,15 +120,15 @@
             box.material = purpleMat;
 
             var boxUp = BABYLON.MeshBuilder.CreateBox("up", {width: 0.01, depth: 0.01, height: 0.3}, scene);
-            boxUp.position.y = 0.75;
+            boxUp.position.y = 0.15;
             boxUp.material = greenMat;
             boxUp.parent = marker;
             var boxRight = BABYLON.MeshBuilder.CreateBox("right", {width: 0.3, depth: 0.01, height: 0.01}, scene);
-            boxRight.position.x = 0.75;
+            boxRight.position.x = 0.15;
             boxRight.material = redMat;
             boxRight.parent = marker;
             var boxFwd = BABYLON.MeshBuilder.CreateBox("back", {width: 0.01, depth: 0.3, height: 0.01}, scene);
-            boxFwd.position.z = 0.75;
+            boxFwd.position.z = 0.15;
             boxFwd.material = blueMat;
             boxFwd.parent = marker;
         
