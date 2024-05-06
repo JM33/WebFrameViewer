@@ -268,20 +268,20 @@
                                 frame.isVisible = true;
                                 
                                 
-                                var matrix = marker.computeWorldMatrix(true);  // force calculation of world matrix
+                                var matrix = markerObject.computeWorldMatrix(true);  // force calculation of world matrix
                                 
                                 var local_pos = new BABYLON.Vector3(0, 0, 0); //top middle of box relative to box
                                 var global_pos = BABYLON.Vector3.TransformCoordinates(local_pos, matrix); //calculate world position
                                                                                 
-                                var newRight = BABYLON.Vector3.Cross(marker.right, BABYLON.Vector3.Up());
+                                var newRight = BABYLON.Vector3.Cross(markerObject.right, BABYLON.Vector3.Up());
                                 newRight.normalize();               
                                 let sourceMatrix = BABYLON.Matrix.FromValues(newRight.x, newRight.y, newRight.z, 0, 
                                                                             BABYLON.Vector3.Up().x, BABYLON.Vector3.Up().y, BABYLON.Vector3.Up().z, 0, 
-                                                                            marker.up.x, marker.up.y, marker.up.z, 0,
+                                                                            markerObject.up.x, markerObject.up.y, markerObject.up.z, 0,
                                                                             0, 0, 0, 1);
                         
-                                let boxMatrix = box.getWorldMatrix();
-                                boxMatrix.copyFrom( sourceMatrix );
+                                let frameMatrix = frame.getWorldMatrix();
+                                frameMatrix.copyFrom( sourceMatrix );
                             }
                         }
         				break;
