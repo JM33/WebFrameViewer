@@ -131,6 +131,15 @@
             boxFwd.position.z = 0.15;
             boxFwd.material = blueMat;
             boxFwd.parent = marker;
+
+            var frame = new BABYLON.Mesh("frame");
+            BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/JM33/WebFrameViewer/main/", "waara_frame.glb", scene, function(newMeshes){
+                newMeshes[0].scaling = new BABYLON.Vector3(0.0254, 0.0254, 0.0254);
+                //newMeshes[0].rotation.x = Math.PI/2;
+                frame = newMeshes[0];
+                frame.isVisible = false;
+                //frame.setParent(marker);
+            });
         
             xrTest.onHitTestResultObservable.add((results) => {
                 if (results.length) {
@@ -182,7 +191,8 @@
                 boxMatrix.copyFrom( sourceMatrix );
                 //box.rotationQuaternion = marker.rotationQuaternion
                 //box.rotationQuaternion = box.rotationQuaternion.add(BABYLON.Quaternion.FromEulerAngles(90,0,0));
-                
+                let frameMatrix = frame.getWorldMatrix();
+                frameMatrix.copyFrom( sourceMatrix );
                 
                 
                 //box.parent = marker;
@@ -200,6 +210,7 @@
 
                 box.position = global_pos; //position sphere relative to world
                 //box.parent = null;
+                frame.positiin = global_pos;
             });
         
             return scene;
