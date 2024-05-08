@@ -159,6 +159,16 @@
                     hitTest = results[0];
                     hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
 
+                    var camVec = marker.position.subtract(camera.position).normalize();
+
+                var angleToFace = Math.acos(BABYLON.Vector3.Dot(camVec, marker.up));
+                
+                if(angleToFace > Math.Tools.ToRadians(90)){
+                    boxUp.material = greenMat;
+                    //angle += BABYLON.Tools.ToRadians(180);
+                }else{
+                    boxUp.material = purpleMat;
+                }
                 } else {
                     marker.isVisible = false;
                 }
@@ -218,16 +228,7 @@
                     angle *= -1;
                 }
                 
-                var camVec = global_pos.subtract(camera.position).normalize();
-
-                var angleToFace = Math.acos(BABYLON.Vector3.Dot(camVec, marker.up));
                 
-                if(angleToFace > Math.Tools.ToRadians(90)){
-                    //boxUp.material = greenMat;
-                    angle += BABYLON.Tools.ToRadians(180);
-                }else{
-                    //boxUp.material = purpleMat;
-                }
 
                 //var abstractPlane = BABYLON.Plane.FromPositionAndNormal(camera.position, camera.getFrontPosition(1));
 
