@@ -159,16 +159,19 @@
                     hitTest = results[0];
                     hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
 
-                    var abstractPlane = BABYLON.Plane.FromPositionAndNormal(camera.position, camera.getFrontPosition(1));
-
-                    var markerRay = new BABYLON.Ray(marker.position, marker.up, 1000, 0.001);
-                    if(markerRay.intersectsPlane(abstractPlane)){
+                    var matrix = marker.computeWorldMatrix(true);  // force calculation of world matrix
+                    var local_pos = new BABYLON.Vector3(0, 0, 0); //top middle of box relative to box
+                    var global_pos = BABYLON.Vector3.TransformCoordinates(local_pos, matrix); //calculate world position
+                    
+                    var camToBack = global_pos.subtract(marker.up).subtract(camera.position).length();
+                    var camToFwd = global_pos.add(marker.up).subtract(camera.position).length();
+                    if(camToBack > camToFwd){
                         boxUp.material = greenMat;
-                        hitsPlane = true;
                     }else{
                         boxUp.material = purpleMat;
-                        hitsPlane = false;
                     }
+
+                    
                 } else {
                     marker.isVisible = false;
                 }
@@ -227,11 +230,29 @@
                 if(crossDot < 0){
                     angle *= -1;
                 }
-                var camToPos = global_pos.subtract(camera.getFrontPosition(0)).length();
-                var camToFwd = global_pos.add(marker.up).subtract(camera.getFrontPosition(0)).length();
-                if(hitsPlane){
+                
+                var camToBack = global_pos.subtract(marker.up).subtract(camera.position).length();
+                var camToFwd = global_pos.add(marker.up).subtract(camera.position).length();
+                if(camToBack > camToFwd){
+                    //boxUp.material = greenMat;
                     angle += BABYLON.Tools.ToRadians(180);
+                }else{
+                    //boxUp.material = purpleMat;
                 }
+
+                //var abstractPlane = BABYLON.Plane.FromPositionAndNormal(camera.position, camera.getFrontPosition(1));
+
+                //    var markerRay = new BABYLON.Ray(marker.position, marker.up, 1000, 0.001);
+                //    if(markerRay.intersectsPlane(abstractPlane)){
+                //        boxUp.material = greenMat;
+                //        hitsPlane = true;
+                //    }else{
+                //        boxUp.material = purpleMat;
+                //        hitsPlane = false;
+                //    }
+                //if(hitsPlane){
+                //    angle += BABYLON.Tools.ToRadians(180);
+                //}
 
                 
                 frame.addRotation(0,angle,0);
