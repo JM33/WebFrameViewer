@@ -218,11 +218,13 @@
                     angle *= -1;
                 }
                 
-                var camToBack = global_pos.subtract(marker.up).subtract(camera.position).length();
-                var camToFwd = global_pos.add(marker.up).subtract(camera.position).length();
-                if(camToBack > camToFwd){
+                var camVec = global_pos.subtract(camera.position).normalize();
+
+                var angleToFace = Math.acos(BABYLON.Vector3.Dot(camVec, marker.up));
+                
+                if(angleToFace < Math.Tools.ToRadians(90)){
                     //boxUp.material = greenMat;
-                    //angle += BABYLON.Tools.ToRadians(180);
+                    angle += BABYLON.Tools.ToRadians(180);
                 }else{
                     //boxUp.material = purpleMat;
                 }
