@@ -222,7 +222,7 @@
 
                 var angleToFace = Math.acos(BABYLON.Vector3.Dot(camVec, marker.up));
                 
-                if(angleToFace < Math.Tools.ToRadians(90)){
+                if(angleToFace > Math.Tools.ToRadians(90)){
                     //boxUp.material = greenMat;
                     angle += BABYLON.Tools.ToRadians(180);
                 }else{
