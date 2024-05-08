@@ -159,7 +159,7 @@
                     hitTest = results[0];
                     hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
 
-                    var camVec = marker.position.subtract(camera.getFrontPosition(0.001).normalize();
+                    var camVec = marker.position.subtract(camera.getFrontPosition(0.001)).normalize();
 
                 var angleToFace = Math.acos(BABYLON.Vector3.Dot(camVec, marker.up));
                 
