@@ -159,19 +159,6 @@
                     hitTest = results[0];
                     hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
 
-                    var matrix = marker.computeWorldMatrix(true);  // force calculation of world matrix
-                    var local_pos = new BABYLON.Vector3(0, 0, 0); //top middle of box relative to box
-                    var global_pos = BABYLON.Vector3.TransformCoordinates(local_pos, matrix); //calculate world position
-                    
-                    var camToBack = global_pos.subtract(marker.up).subtract(camera.position).length();
-                    var camToFwd = global_pos.add(marker.up).subtract(camera.position).length();
-                    if(camToBack > camToFwd){
-                        boxUp.material = greenMat;
-                    }else{
-                        boxUp.material = purpleMat;
-                    }
-
-                    
                 } else {
                     marker.isVisible = false;
                 }
@@ -235,7 +222,7 @@
                 var camToFwd = global_pos.add(marker.up).subtract(camera.position).length();
                 if(camToBack > camToFwd){
                     //boxUp.material = greenMat;
-                    angle += BABYLON.Tools.ToRadians(180);
+                    //angle += BABYLON.Tools.ToRadians(180);
                 }else{
                     //boxUp.material = purpleMat;
                 }
