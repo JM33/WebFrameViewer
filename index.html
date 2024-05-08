@@ -219,6 +219,15 @@
                 if(camToFwd > camToPos){
                     //angle += BABYLON.Tools.ToRadians(180);
                 }
+
+                var abstractPlane = BABYLON.Plane.FromPositionAndNormal(camera.position, camera.getFrontPosition(1));
+
+                var markerRay = new BABYLON.Ray(marker.position, marker.up, 1000, 0.001);
+                if(markerRay.intersectsPlane(abstractPlane)){
+                    //box.material = greenMat;
+                }else{
+                    angle += BABYLON.Tools.ToRadians(180);
+                }
                 
                 frame.addRotation(0,angle,0);
                 //frame.rotationQuaternion = BABYLON.Quaternion.RotationAxis(frame.up, BABYLON.Tools.ToRadians(angle));
