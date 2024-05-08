@@ -150,12 +150,25 @@
             });
             frame.rotationQuaternion = new BABYLON.Quaternion();
             frame.isVisible = false;
+
+            var hitsPlane = false;
         
             xrTest.onHitTestResultObservable.add((results) => {
                 if (results.length) {
                     marker.isVisible = true;
                     hitTest = results[0];
                     hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
+
+                    var abstractPlane = BABYLON.Plane.FromPositionAndNormal(camera.position, camera.getFrontPosition(1));
+
+                    var markerRay = new BABYLON.Ray(marker.position, marker.up, 1000, 0.001);
+                    if(markerRay.intersectsPlane(abstractPlane)){
+                        boxUp.material = greenMat;
+                        hitsPlane = true;
+                    }else{
+                        boxUp.material = purpleMat;
+                        hitsPlane = false;
+                    }
                 } else {
                     marker.isVisible = false;
                 }
@@ -216,12 +229,11 @@
                 }
                 var camToPos = global_pos.subtract(camera.getFrontPosition(0)).length();
                 var camToFwd = global_pos.add(marker.up).subtract(camera.getFrontPosition(0)).length();
-                if(camToFwd > camToPos){
-                    //angle += BABYLON.Tools.ToRadians(180);
+                if(hitsPlane){
+                    angle += BABYLON.Tools.ToRadians(180);
                 }
 
-                var abstractPlane = BABYLON.Plane.FromPositionAndNormal(camera.position, camera.getFrontPosition(1));
-
+                
                 var markerRay = new BABYLON.Ray(marker.position, marker.up, 1000, 0.001);
                 if(markerRay.intersectsPlane(abstractPlane)){
                     boxUp.material = greenMat;
