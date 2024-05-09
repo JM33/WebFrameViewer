@@ -159,10 +159,10 @@
                     hitTest = results[0];
                     hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
 
-                    var camVec = camera.position.subtract(marker.position).normalize();
-                    var upVec = marker.up.normalize();
+                    var camVec = marker.position.add(camera.position).normalize();
+                    var upVec = marker.position.add(marker.up).normalize();
 
-                    var angleToFace = Math.acos(BABYLON.Vector3.Dot(camVec, marker.up));
+                    var angleToFace = Math.acos(BABYLON.Vector3.Dot(camVec, upVec));
                 
                     if(angleToFace > BABYLON.Tools.ToRadians(90)){
                         boxUp.material = greenMat;
