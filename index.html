@@ -230,7 +230,7 @@
                 
                 frame.position = global_pos;
 
-                wall.addRotation(0,angle,0);
+                wall.addRotation(0, BABYLON.Tools.ToRadians(180) +angle,0);
                 wall.position = global_pos;
             });
 
