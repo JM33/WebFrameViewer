@@ -251,12 +251,7 @@
             var startingPointXY;
             
             var pointerDown = function (mesh) {
-                frame.getChildren().forEach(function(frameChild) {
-                      if(mesh = frameChild){
-                        mesh = frame;
-                      }
-                });
-                currentMesh = mesh;
+                currentMesh = frame;
                 startingPoint = getWallPosition();
                 startingPointXY = new BABYLON.Vector2(scene.pointerX, scene.pointerY);
                 if (startingPoint) { // we need to disconnect camera from canvas
@@ -284,11 +279,11 @@
                 }
         
                 var diff = current.subtract(startingPoint);
-                currentMesh.position.addInPlace(diff);
+                //currentMesh.position.addInPlace(diff);
                 var diffX = scene.pointerX - startingPointXY.x;
                 var diffY = scene.pointerY - startingPointXY.y;
 
-                //currentMesh.position.addInPlace(new BABYLON.Vector3(diffX * 0.1, 0, diffY * 0.1));
+                currentMesh.position.addInPlace(new BABYLON.Vector3(diffX * 0.1, 0, diffY * 0.1));
                 
                 startingPoint = current;
         
