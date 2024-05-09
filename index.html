@@ -243,7 +243,10 @@
         
                 return null;
             }
-        
+
+            var startingPoint;
+            var currentMesh;
+            
             var pointerDown = function (mesh) {
                 currentMesh = mesh;
                 startingPoint = getWallPosition();
@@ -253,19 +256,7 @@
                     }, 0);
                 }
             }
-
-        
-            var startingPoint;
-            var currentMesh;
-        
-            startingPoint = getWallPosition();
-                if (startingPoint) { // we need to disconnect camera from canvas
-                    setTimeout(function () {
-                        camera.detachControl(canvas);
-                    }, 0);
-                }
-            }
-        
+            
             var pointerUp = function () {
                 if (startingPoint) {
                     camera.attachControl(canvas, true);
