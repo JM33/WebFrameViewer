@@ -251,9 +251,11 @@
             var startingPointXY;
             
             var pointerDown = function (mesh) {
-                while (mesh.parent !== null) {
-                    mesh = mesh.parent;
-                }
+                frame.getChildren().forEach(function(frameChild) {
+                      if(mesh = frameChild){
+                        mesh = frame;
+                      }
+                });
                 currentMesh = mesh;
                 startingPoint = getWallPosition();
                 startingPointXY = new BABYLON.Vector2(scene.pointerX, scene.pointerY);
