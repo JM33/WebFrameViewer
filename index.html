@@ -161,15 +161,15 @@
 
                     var camVec = marker.position.subtract(camera.position).normalize();
 
-                var angleToFace = Math.acos(BABYLON.Vector3.Dot(camVec, marker.up));
+                    var angleToFace = Math.acos(BABYLON.Vector3.Dot(camVec, marker.up));
                 
-                if(angleToFace > BABYLON.Tools.ToRadians(90)){
-                    boxUp.material = greenMat;
-                    hitsBack = false;
-                }else{
-                    boxUp.material = purpleMat;
-                    hitsBack = true;
-                }
+                    if(angleToFace > BABYLON.Tools.ToRadians(90)){
+                        boxUp.material = greenMat;
+                        hitsBack = false;
+                    }else{
+                        boxUp.material = purpleMat;
+                        hitsBack = true;
+                    }
                 } else {
                     marker.isVisible = false;
                 }
