@@ -248,6 +248,9 @@
             var currentMesh;
             
             var pointerDown = function (mesh) {
+                while (mesh.parent !== null) {
+                    mesh = mesh.parent;
+                }
                 currentMesh = mesh;
                 startingPoint = getWallPosition();
                 if (startingPoint) { // we need to disconnect camera from canvas
@@ -285,7 +288,7 @@
                 switch (pointerInfo.type) {
         			case BABYLON.PointerEventTypes.POINTERDOWN:
         				if(pointerInfo.pickInfo.hit && pointerInfo.pickInfo.pickedMesh != wall) {
-                            pointerDown(pointerInfo.pickInfo.pickedMesh.parent)
+                             pointerDown(pointerInfo.pickInfo.pickedMesh)
                         }
         				break;
         			case BABYLON.PointerEventTypes.POINTERUP:
