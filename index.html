@@ -240,12 +240,15 @@
                 if (pickinfo.hit) {
                     return pickinfo.pickedPoint;
                 }
+
+                
         
                 return null;
             }
 
             var startingPoint;
             var currentMesh;
+            var startingPointXY;
             
             var pointerDown = function (mesh) {
                 while (mesh.parent !== null) {
@@ -253,6 +256,7 @@
                 }
                 currentMesh = mesh;
                 startingPoint = getWallPosition();
+                startingPointXY = new BABYLON.Vector2(scene.pointerX, scene.pointerY);
                 if (startingPoint) { // we need to disconnect camera from canvas
                     setTimeout(function () {
                         camera.detachControl(canvas);
@@ -278,8 +282,12 @@
                 }
         
                 var diff = current.subtract(startingPoint);
-                currentMesh.position.addInPlace(diff * 5);
-        
+                //currentMesh.position.addInPlace(diff);
+                var diffX = scene.pointerX - startingPointXY.x;
+                var diffY = scene.pointerY - startingPointXY.y;
+
+                currentMesh.position.addInPlace(new BABYLON.Vector3(diffX * 0.1, 0, diffY * 0.1);
+                
                 startingPoint = current;
         
             }
