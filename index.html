@@ -151,7 +151,7 @@
             frame.rotationQuaternion = new BABYLON.Quaternion();
             frame.isVisible = false;
 
-            var hitsPlane = false;
+            var hitsBack = false;
         
             xrTest.onHitTestResultObservable.add((results) => {
                 if (results.length) {
@@ -165,9 +165,10 @@
                 
                 if(angleToFace > BABYLON.Tools.ToRadians(90)){
                     boxUp.material = greenMat;
-                    //angle += BABYLON.Tools.ToRadians(180);
+                    hitsBack = false;
                 }else{
                     boxUp.material = purpleMat;
+                    hitsBack = true;
                 }
                 } else {
                     marker.isVisible = false;
@@ -187,37 +188,11 @@
             button.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
         
             button.onPointerClickObservable.add(() => {
-                //box.parent = marker;
                 var matrix = marker.computeWorldMatrix(true);  // force calculation of world matrix
-                //let boxMatrix = box.getWorldMatrix();
-                //boxMatrix.copyFrom( matrix );
-                //box.addRotation(Math.PI/2, 0, 0);
                 
                 var local_pos = new BABYLON.Vector3(0, 0, 0); //top middle of box relative to box
                 var global_pos = BABYLON.Vector3.TransformCoordinates(local_pos, matrix); //calculate world position
-        
-                //box2.position = global_pos; //position sphere relative to world
-                                        
-                var newRight = BABYLON.Vector3.Cross(marker.right, BABYLON.Vector3.Up());
-                newRight.normalize();               
-                let sourceMatrix = BABYLON.Matrix.FromValues(newRight.x, newRight.y, newRight.z, 0, 
-                                                            BABYLON.Vector3.Up().x, BABYLON.Vector3.Up().y, BABYLON.Vector3.Up().z, 0, 
-                                                            marker.up.x, marker.up.y, marker.up.z, 0,
-                                                            0, 0, 0, 1);
-                //let sourceMatrix = BABYLON.Matrix.FromValues(1, 0, 0, 0, 
-                //                                             0, 1, 0, 0, 
-                //                                             0, 0, 1, 0, 
-                //                                             0, 2, 0, 1);
-        
-        
-                let boxMatrix = box.getWorldMatrix();
-                //boxMatrix.copyFrom( sourceMatrix );
-                //box.rotationQuaternion = marker.rotationQuaternion
-                //box.rotationQuaternion = box.rotationQuaternion.add(BABYLON.Quaternion.FromEulerAngles(90,0,0));
-                let frameMatrix = frame.getWorldMatrix();
-                //frameMatrix.copyFrom( sourceMatrix );
                 
-                //frame.rotationQuaternion = new BABYLON.Quaternion();
                 var fromV = frame.forward;
                 var toV = marker.up;
         
@@ -227,45 +202,12 @@
                 if(crossDot < 0){
                     angle *= -1;
                 }
+                if(hitsBack){
+                    angle += BABYLON.Tools.ToRadians(180);
+                }
                 
-                
-
-                //var abstractPlane = BABYLON.Plane.FromPositionAndNormal(camera.position, camera.getFrontPosition(1));
-
-                //    var markerRay = new BABYLON.Ray(marker.position, marker.up, 1000, 0.001);
-                //    if(markerRay.intersectsPlane(abstractPlane)){
-                //        boxUp.material = greenMat;
-                //        hitsPlane = true;
-                //    }else{
-                //        boxUp.material = purpleMat;
-                //        hitsPlane = false;
-                //    }
-                //if(hitsPlane){
-                //    angle += BABYLON.Tools.ToRadians(180);
-                //}
-
                 
                 frame.addRotation(0,angle,0);
-                //frame.rotationQuaternion = BABYLON.Quaternion.RotationAxis(frame.up, BABYLON.Tools.ToRadians(angle));
-                
-                //var fromV = frame.right;
-                //var toV = BABYLON.Vector3.Up();
-        
-                //var angle = Math.acos(BABYLON.Vector3.Dot(fromV, toV));
-                //var cross= BABYLON.Vector3.Cross(fromV, toV);
-                //var crossDot = BABYLON.Vector3.Dot(cross, box.up);
-                //if(crossDot < 0){
-                  //  angle *= -1;
-                //}
-                //box.addRotation(0,angle,0);
-
-                //box.position = global_pos; //position sphere relative to world
-                //box.parent = null;
-                //frame.position = global_pos;
-                
-                
-
-
                 
                 frame.position = global_pos;
             });
