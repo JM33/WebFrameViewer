@@ -160,6 +160,7 @@
                     hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
 
                     var camVec = marker.position.subtract(camera.position).normalize();
+                    var upVec = marker.position.subtract(marker.up).normalize();
 
                     var angleToFace = Math.acos(BABYLON.Vector3.Dot(camVec, marker.up));
                 
