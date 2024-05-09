@@ -159,7 +159,17 @@
                     hitTest = results[0];
                     hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
 
-                    var camVec = camera.position.subtract(marker.position).normalize();
+                    var matrix = marker.computeWorldMatrix(true);  // force calculation of world matrix
+                
+                    var local_pos = new BABYLON.Vector3(0, 0, 0); //top middle of box relative to box
+                    var global_pos = BABYLON.Vector3.TransformCoordinates(local_pos, matrix); //calculate world position
+
+                    var matrixCam = camera.computeWorldMatrix(true);  // force calculation of world matrix
+                
+                    var global_pos_cam = BABYLON.Vector3.TransformCoordinates(local_pos, matrixCam); //calculate world position
+                
+                
+                    var camVec = global_pos_cam.subtract(global_pos).normalize();
                     var upVec = marker.up.normalize();
 
                     var angleToFace = Math.acos(BABYLON.Vector3.Dot(camVec, upVec));
