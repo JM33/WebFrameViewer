@@ -236,7 +236,7 @@
 
 
             var getWallPosition = function () {
-            var pickinfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return mesh == wall; });
+                var pickinfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return mesh == wall; });
                 if (pickinfo.hit) {
                     return pickinfo.pickedPoint;
                 }
@@ -285,7 +285,7 @@
                 switch (pointerInfo.type) {
         			case BABYLON.PointerEventTypes.POINTERDOWN:
         				if(pointerInfo.pickInfo.hit && pointerInfo.pickInfo.pickedMesh != wall) {
-                            pointerDown(pointerInfo.pickInfo.pickedMesh)
+                            pointerDown(pointerInfo.pickInfo.pickedMesh.parent)
                         }
         				break;
         			case BABYLON.PointerEventTypes.POINTERUP:
