@@ -9,7 +9,7 @@
   </head>
   <body>
     <!-- <model-viewer> HTML element -->
-    <model-viewer id="transform" src="waara_frame.glb" ar ar-modes="webxr scene-viewer quick-look" ar-placement="wall" ar-scale="fixed" camera-controls tone-mapping="neutral" poster="poster.webp" shadow-intensity="1">
+    <model-viewer src="waara-frame-scaled.glb" ar ar-modes="webxr scene-viewer quick-look" ar-placement="wall" ar-scale="fixed" camera-controls tone-mapping="neutral" poster="poster.webp" shadow-intensity="1">
       <div class="progress-bar hide" slot="progress-bar">
           <div class="update-bar"></div>
       </div>
@@ -20,15 +20,6 @@
           <img src="ar_hand_prompt.png">
       </div>
     </model-viewer>  
-    <script>
-      const modelViewerTransform = document.querySelector("model-viewer#transform");
-      
-      //modelViewerTransform.scale = `${0.0254} ${0.0254} ${0.0254}`;
-      const updateScale = () => {
-      //modelViewerTransform.scale = `${x.value} ${y.value} ${z.value}`;
-      };
-
-    </script>
     <script src="script.js"></script>
     <!-- Loads <model-viewer> for browsers: -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
