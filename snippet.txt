@@ -1,4 +1,4 @@
-<model-viewer src="waara_frame.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral" poster="poster.webp" shadow-intensity="1">
+<model-viewer src="BK-frame-model.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls poster="poster.webp" shadow-intensity="1" min-camera-orbit="-90deg auto auto" max-camera-orbit="90deg auto auto" tone-mapping="neutral">
     <div class="progress-bar hide" slot="progress-bar">
         <div class="update-bar"></div>
     </div>
